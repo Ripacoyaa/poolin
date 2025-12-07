@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poolin - Select Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #03045E 0%, #0608C4 100%);
+    }
+  </style>
+</head>
+
+    <body class="h-screen overflow-hidden gradient-bg text-white px-6">
+         <div class="max-w-screen-xl pt10 pb10">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-10">
+      <img src="Poolin/assets/logoPoolin.png" class="w-40 opacity30" />
+      <button class="text-white/80 hover:text-white text-lg">Logout</button>
+    </div>
+
+      <!-- Welcome -->
+    <div class="text-center align-top max-w-2xl mx-auto">
+      <h1 class="text-4xl font-extrabold mb-2">Welcome Back, Rara 👋</h1>
+      <h2 class="text-2xl font-semibold mb-1">Where do you want to go today?</h2>
+      <p class="text-white/70">Choose your saving space to start managing your goals.</p>
+    </div>
+
+  <!-- Options -->
+  <div class="flex flex-wrap justify-center gap-10 mt-14 max-w-screen-xl">
+
+    <!-- Personal Savings -->
+    <div class="w-64 h-72 bg-blue-100 rounded-2xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+      <div class="w-20 h-20 mx-auto rounded-full bg-white flex items-center justify-center shadow-md">
+        <img src="Poolin/assets/logoPersonal.png" class="w-16 object-contain opacity30">
+      </div>
+      <h3 class="text-blue-900 font-bold text-xl mt-4">Personal Savings</h3>
+      <p class="text-blue-700 text-sm mt-2">
+        Manage your personal saving goals, track deposits, achievements, all in one place.
+      </p>
+    </div>
+
+    <!-- Group Savings -->
+    <div class="w-64 h-72 bg-blue-100 rounded-2xl shadow-lg p-6 text-center hover:scale-105 transition cursor-pointer">
+      <div class="w-20 h-20 bg-white mx-auto rounded-full flex items-center justify-center shadow-md">
+        <img src="Poolin/assets/logoGroup.png" class="w-16 opacity30">
+      </div>
+      <h3 class="text-blue-900 font-bold text-xl mt-4 opacity30">Group Savings</h3>
+      <p class="text-blue-700 text-sm mt-2">
+        Create or join saving rooms with friends or family. Stay transparent and reach goals faster.
+      </p>
+    </div>
+
+    <!-- Modal Group Room -->
+    <div id="groupModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-[#CFF1F9] rounded-xl shadow-xl w-full max-w-md p-8 text-center">
+        <h2 class="text-2xl font-bold text-blue-900 mb-6">CHOOSE ONE</h2>
+        <div class="flex justify-center gap-6">
+
+        <!-- JOIN ROOM -->
+        <button onclick="selectOption('join')" id="joinBtn"
+            class="w-32 h-32 bg-blue-700 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-blue-800 active:bg-blue-900 transition">
+            <img src="Poolin/assets/logoJoinGroup.png" class="w-12 h-12" />
+            <span class="text-white font-semibold">Join Room</span>
+        </button>
+
+        <!-- CREATE ROOM -->
+        <button onclick="selectOption('create')" id="createBtn"
+            class="w-32 h-32 bg-blue-700 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-blue-800 active:bg-blue-900 transition">
+            <img src="Poolin/assets/logoCreateRoom.png" class="w-14 h-14" />
+            <span class="text-white font-semibold">Create Room</span>
+        </button>
+
+        </div>
+    </div>
+    </div>
+  </div>
+
+    <!-- Join Room Step -->
+    <div id="joinRoomStep" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-[#CFF1F9] rounded-xl shadow-xl w-full max-w-md p-8 text-center">
+        <h2 class="text-2xl font-bold text-blue-900 mb-4">Join Room</h2>
+        <p class="text-blue-800 mb-6">Enter the unique code to join the room that has been created.</p>
+
+        <input type="text" id="roomCodeInput"
+        class="w-full px-4 py-3 rounded-lg text-blue-900 font-semibold text-center uppercase tracking-widest placeholder:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter room code" maxlength="20" />
+
+        <button class="mt-6 w-full text-white font-bold py-3 rounded-lg transition bg-gradient-to-r from-[#03045E] to-[#0608C4] hover:from-[#0608C4] hover:to-[#03045E]">
+            Join Room
+        </button>
+    </div>
+    </div>
+    <!-- Create Room Step -->
+    <div id="createRoomStep" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-[#CFF1F9] rounded-xl shadow-xl w-full max-w-md p-8 text-center">
+        <h2 class="text-2xl font-bold text-blue-900 mb-4">Create Room</h2>
+        <p class="text-blue-800 mb-6">Give the room a name to start a joint savings.</p>
+
+        <input type="text" id="roomNameInput"
+        class="w-full px-4 py-3 rounded-lg text-blue-900 font-semibold text-center placeholder:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter Room name" maxlength="30" />
+
+        <button id="createRoomBtn" type="button"
+        class="mt-6 w-full text-white font-bold py-3 rounded-lg transition bg-gradient-to-r from-[#03045E] to-[#0608C4] hover:from-[#0608C4] hover:to-[#03045E]">
+        Create Room
+        </button>
+    </div>
+    </div>
+
+    <!-- Room Created Confirmation -->
+    <div id="roomCreatedStep" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+    <div class="bg-[#CFF1F9] rounded-xl shadow-xl w-full max-w-md p-8 text-center">
+        <h2 class="text-2xl font-bold text-blue-900 mb-4">Room Created</h2>
+        <p class="text-blue-800 mb-4">Share this code with your friends so they can join the room:</p>
+
+        <div id="roomCodeDisplay"
+        class="text-3xl font-bold text-blue-900 bg-white px-6 py-3 rounded-lg tracking-widest mb-6 shadow-md">
+        A74JD91
+        </div>
+
+        <button class="w-full text-white font-bold py-3 rounded-lg transition bg-gradient-to-r from-[#03045E] to-[#0608C4] hover:from-[#0608C4] hover:to-[#03045E]">
+        Enter the Room
+        </button>
+    </div>
+    </div>
+
+<script>
+  // Trigger modal saat Group Savings diklik
+    document.querySelectorAll('.cursor-pointer')[1].addEventListener('click', function () {
+    document.getElementById('groupModal').classList.remove('hidden');
+  });
+
+  // Efek klik tombol JOIN/CREATE
+  function selectOption(type) {
+    const joinBtn = document.getElementById('joinBtn');
+    const createBtn = document.getElementById('createBtn');
+
+    if (type === 'join') {
+      joinBtn.classList.add('bg-blue-300');
+      createBtn.classList.remove('bg-blue-300');
+    } else {
+      createBtn.classList.add('bg-blue-300');
+      joinBtn.classList.remove('bg-blue-300');
+    }
+
+    console.log("Selected:", type);
+  }
+</script>
+<script>
+  function selectOption(type) {
+    const joinBtn = document.getElementById('joinBtn');
+    const createBtn = document.getElementById('createBtn');
+
+    if (type === 'join') {
+      joinBtn.classList.add('bg-blue-300');
+      createBtn.classList.remove('bg-blue-300');
+
+      // Tampilkan step Join Room
+      document.getElementById('groupModal').classList.add('hidden');
+      document.getElementById('joinRoomStep').classList.remove('hidden');
+
+    } else {
+      createBtn.classList.add('bg-blue-300');
+      joinBtn.classList.remove('bg-blue-300');
+
+      // Tampilkan step Create Room
+      document.getElementById('groupModal').classList.add('hidden');
+      document.getElementById('createRoomStep').classList.remove('hidden');
+    }
+
+    console.log("Selected:", type);
+  }
+</script>
+<script>
+
+  // Fungsi interaksi tombol Join/Create
+  function selectOption(type) {
+    const joinBtn = document.getElementById('joinBtn');
+    const createBtn = document.getElementById('createBtn');
+
+    if (type === 'join') {
+      joinBtn.classList.add('bg-blue-300');
+      createBtn.classList.remove('bg-blue-300');
+
+      document.getElementById('groupModal').classList.add('hidden');
+      document.getElementById('joinRoomStep').classList.remove('hidden');
+
+    } else {
+      createBtn.classList.add('bg-blue-300');
+      joinBtn.classList.remove('bg-blue-300');
+
+      document.getElementById('groupModal').classList.add('hidden');
+      document.getElementById('createRoomStep').classList.remove('hidden');
+
+      // Simulasi submit dan tampilkan kode
+      setTimeout(() => {
+        const code = generateRoomCode();
+        document.getElementById('createRoomStep').classList.add('hidden');
+        document.getElementById('roomCodeDisplay').textContent = code;
+        document.getElementById('roomCreatedStep').classList.remove('hidden');
+      }, 1000);
+    }
+
+    console.log("Selected:", type);
+  }
+</script>
+<script>
+  function generateRoomCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  // Pilih opsi join/create di modal awal
+  function selectOption(type) {
+    const joinBtn = document.getElementById('joinBtn');
+    const createBtn = document.getElementById('createBtn');
+
+    if (type === 'join') {
+      joinBtn.classList.add('bg-blue-300');
+      createBtn.classList.remove('bg-blue-300');
+
+      document.getElementById('groupModal').classList.add('hidden');
+      document.getElementById('joinRoomStep').classList.remove('hidden');
+
+    } else if (type === 'create') {
+      createBtn.classList.add('bg-blue-300');
+      joinBtn.classList.remove('bg-blue-300');
+
+      document.getElementById('groupModal').classList.add('hidden');
+      document.getElementById('createRoomStep').classList.remove('hidden');
+    }
+  }
+
+  // Klik tombol Create Room di modal input
+  document.addEventListener('DOMContentLoaded', function () {
+    const createRoomBtn = document.getElementById('createRoomBtn');
+
+    createRoomBtn.addEventListener('click', function () {
+      const roomName = document.getElementById('roomNameInput').value.trim();
+
+      if (roomName === '') {
+        alert('Please enter a room name.');
+        return;
+      }
+
+      const code = generateRoomCode();
+      document.getElementById('createRoomStep').classList.add('hidden');
+      document.getElementById('roomCodeDisplay').textContent = code;
+      document.getElementById('roomCreatedStep').classList.remove('hidden');
+
+      console.log("Room created:", roomName, "Code:", code);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Transaction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-[#CFF1F9] h-screen flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+        <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+            <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+        </div>
+
+        <nav class="space-y-2">
+            <a href="home.html"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+                <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" />
+                Home
+            </a>
+
+            <a href="myGoalsActive.html"
+               class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
+                <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" />
+                My Goals
+            </a>
+
+            <a href="report.html"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+                <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" />
+                Report
+            </a>
+
+            <a href="setting.html"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
+                Setting
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-4">
+
+        <!-- GOAL HEADER -->
+        <div class="flex items-center gap-5 bg-[#E4F1FF] p-4 rounded-xl border border-blue-200 shadow mb-6">
+            <img src="D:/Poolin/assets/bali.jpeg" class="w-24 h-20 rounded-xl object-cover">
+            <div>
+                <h2 class="text-2xl font-bold text-[#03045E]">Save to : Liburan Bali</h2>
+                <p class="text-gray-700">Target : Rp 10.000.000</p>
+                <p class="text-gray-700">Progress : 87%</p>
+            </div>
+        </div>
+
+        <!-- TRANSACTION BOX (FULL WIDTH + LOWER HEIGHT) -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl border border-blue-200 w-full">
+
+            <h2 class="text-2xl font-bold text-[#03045E] mb-4">Transaction</h2>
+
+            <!-- TABS -->
+            <div class="flex mb-5 h-10">
+                <button id="btnSaving"
+                    class="flex-1 bg-blue-100 text-[#03045E] font-semibold rounded-l-xl">
+                    Saving
+                </button>
+
+                <button id="btnWithdraw"
+                    class="flex-1 bg-[#03045E] text-white font-semibold rounded-r-xl">
+                    Withdraw
+                </button>
+            </div>
+
+            <!-- FORM -->
+            <div>
+                <label class="font-semibold text-gray-700">Date</label>
+                <input type="date" class="w-full border rounded-lg p-2 mt-1 mb-3">
+
+                <label class="font-semibold text-gray-700">Amount (Rp)</label>
+                <input type="number" class="w-full border rounded-lg p-2 mt-1 mb-3">
+
+                <label class="font-semibold text-gray-700">Note</label>
+                <textarea class="w-full border rounded-lg p-2 mt-1 h-10 mb-3"></textarea>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="flex gap-4 mt-4">
+                <button
+                    class="w-1/2 py-2 bg-[#03045E] text-white rounded-xl font-bold hover:bg-[#050691]">
+                    Save
+                </button>
+
+                <a href="myGoalsActive.html"
+                    class="w-1/2 py-2 bg-gray-300 text-gray-800 text-center rounded-xl font-bold hover:bg-gray-400">
+                    Cancel
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        // Tab interaction
+        const btnSaving = document.getElementById("btnSaving");
+        const btnWithdraw = document.getElementById("btnWithdraw");
+
+        btnSaving.addEventListener("click", () => {
+            btnSaving.classList.add("bg-blue-100", "text-[#03045E]");
+            btnWithdraw.classList.add("text-white", "bg-[#03045E]");
+
+            btnSaving.classList.remove("bg-[#03045E]", "text-white");
+            btnWithdraw.classList.remove("bg-blue-100", "text-[#03045E]");
+        });
+
+        btnWithdraw.addEventListener("click", () => {
+            btnWithdraw.classList.add("bg-blue-100", "text-[#03045E]");
+            btnSaving.classList.add("text-white", "bg-[#03045E]");
+
+            btnWithdraw.classList.remove("bg-[#03045E]", "text-white");
+            btnSaving.classList.remove("bg-blue-100", "text-[#03045E]");
+        });
+    </script>
+
+</body>
+</html>

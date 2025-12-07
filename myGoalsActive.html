@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="flex h-screen overflow-hidden bg-[#CFF1F9]">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+        <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+            <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+        </div>
+
+        <nav class="space-y-2">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" />
+                Home
+            </a>
+
+            <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
+                <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" />
+                My Goals
+            </div>
+
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" />
+                Report
+            </a>
+
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
+                Setting
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8 overflow-hidden">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-3">
+                <img src="D:/Poolin/assets/savings.png" class="w-10 opacity-90" />
+                <div>
+                    <h1 class="text-3xl font-bold text-[#03045E]">My Goals</h1>
+                    <p class="text-blue-800 -mt-1">Manage all your saving goals</p>
+                </div>
+            </div>
+
+            <!-- Personal/Group Switch -->
+            <div id="toggleSwitch" class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
+                <button id="btnPersonal"
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white text-sm font-semibold">
+                    Personal
+                </button>
+                <button id="btnGroup"
+                    class="px-4 py-1.5 rounded-full text-[#03045E] text-sm font-semibold">
+                    Group
+                </button>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex bg-white rounded-xl border border-blue-300 shadow overflow-hidden">
+                <button id="tabActive" 
+                        class="px-5 py-2 text-blue-700 font-bold hover:bg-blue-50 transition-colors duration-300">
+                <a href="myGoalsActive.html?tab=active" class="block w-full h-full">Active</a>
+                </button>
+                <button id="tabFinished" 
+                        class="px-5 py-2 text-blue-700 font-bold hover:bg-blue-50 transition-colors duration-300">
+                 <a href="myGoalsFinished.html?tab=finished" class="block w-full h-full">Finished</a>
+                </button>
+            </div>
+            <button
+                class="px-5 py-2 bg-[#0608C4] hover:bg-[#050691] transition text-white rounded-xl font-semibold shadow cursor-pointer">
+                + Create a New Goal
+            </button>
+        </div>
+
+        <!-- GOAL CARDS (Scroll Only This Area) -->
+        <div class="max-w-[1150px] mx-auto h-[70vh] overflow-y-auto space-y-6 pr-2">
+
+            <!-- CARD TEMPLATE -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 w-full">
+                <div class="flex items-start gap-5">
+                    <img src="D:/Poolin/assets/bali.jpeg" class="w-24 h-24 rounded-xl object-cover">
+
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 class="text-xl font-bold text-[#03045E]">Liburan Bali</h2>
+                                <p class="text-sm text-gray-500 mt-1 countdown" data-target-date="2026-06-16">
+                                    <span class="days-left"></span> days left • Target: 2026-06-16
+                                </p>
+                            </div>
+
+                            <div class="flex gap-3 text-[#03045E]">
+                                <button class="text-lg"><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button class="text-lg"><i class="fa-regular fa-trash-can"></i></button>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 text-sm mt-2">
+                            Rencana liburan ke Bali dengan anggaran yang telah dipersiapkan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="mt-4">
+                    <p class="text-gray-700 text-sm font-semibold mb-1">Progress</p>
+
+                    <div class="w-full bg-gray-200 rounded-full h-5 relative overflow-hidden">
+                        <div class="h-full rounded-full flex justify-end items-center pr-2 text-white text-xs font-bold"
+                            style="width: 87%; background: linear-gradient(90deg,#0077B6,#023E8A,#03045E);">
+                            87%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-3 mt-4 text-white text-sm">
+                    <div class="bg-gradient-to-br from-[#023E8A] to-[#0077B6] p-3 rounded-xl">
+                        <p class="opacity-70">Collected</p>
+                        <p class="font-bold text-lg">Rp 13.050.000</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-[#023E8A] to-[#0096C7] p-3 rounded-xl">
+                        <p class="opacity-70">Money left</p>
+                        <p class="font-bold text-lg">Rp 1.950.000</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-[#023E8A] to-[#48CAE4] p-3 rounded-xl">
+                        <p class="opacity-70">Target</p>
+                        <p class="font-bold text-lg">Rp 15.000.000</p>
+                    </div>
+                </div>
+
+                <button
+                    class="w-full mt-5 bg-gradient-to-r from-[#023E8A] to-[#03045E] text-white py-2 text-base rounded-xl font-bold save-btn">
+                    Save Now
+                </button>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 w-full">
+
+                <div class="flex items-start gap-5">
+                    <img src="D:/Poolin/assets/laptop.jpg" class="w-24 h-24 rounded-xl object-cover">
+
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 class="text-xl font-bold text-[#03045E]">Laptop Baru</h2>
+                                <p class="text-sm text-gray-500 mt-1 countdown" data-target-date="2026-09-10">
+                                    <span class="days-left"></span> days left • Target: 2026-09-10
+                                </p>
+                            </div>
+
+                            <div class="flex gap-3 text-[#03045E]">
+                                <button class="text-lg"><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button class="text-lg"><i class="fa-regular fa-trash-can"></i></button>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 text-sm mt-2">
+                            Tabungan untuk membeli laptop baru demi menunjang produktivitas kerja.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="mt-4">
+                    <p class="text-gray-700 text-sm font-semibold mb-1">Progress</p>
+
+                    <div class="w-full bg-gray-200 rounded-full h-5 relative overflow-hidden">
+                        <div class="h-full rounded-full flex justify-end items-center pr-2 text-white text-xs font-bold"
+                            style="width: 48%; background: linear-gradient(90deg,#0077B6,#023E8A,#03045E);">
+                            48%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-3 mt-4 text-white text-sm">
+                    <div class="bg-gradient-to-br from-[#023E8A] to-[#0077B6] p-3 rounded-xl">
+                        <p class="opacity-70">Collected</p>
+                        <p class="font-bold text-lg">Rp 6.000.000</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-[#023E8A] to-[#0096C7] p-3 rounded-xl">
+                        <p class="opacity-70">Money left</p>
+                        <p class="font-bold text-lg">Rp 6.500.000</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-[#023E8A] to-[#48CAE4] p-3 rounded-xl">
+                        <p class="opacity-70">Target</p>
+                        <p class="font-bold text-lg">Rp 12.500.000</p>
+                    </div>
+                </div>
+
+                <button
+                    class="w-full mt-5 bg-gradient-to-r from-[#023E8A] to-[#03045E] text-white py-2 text-base rounded-xl font-bold save-btn">
+                    Save Now
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Toggle Personal / Group
+        const btnPersonal = document.getElementById("btnPersonal");
+        const btnGroup = document.getElementById("btnGroup");
+
+        btnPersonal.addEventListener("click", () => {
+            btnPersonal.classList.add("bg-[#03045E]", "text-white");
+            btnGroup.classList.remove("bg-[#03045E]", "text-white");
+            btnGroup.classList.add("text-[#03045E]");
+        });
+
+        btnGroup.addEventListener("click", () => {
+            btnGroup.classList.add("bg-[#03045E]", "text-white");
+            btnPersonal.classList.remove("bg-[#03045E]", "text-white");
+            btnPersonal.classList.add("text-[#03045E]");
+        });
+
+        // Save Now buttons
+        document.querySelectorAll(".save-btn").forEach(btn => {
+            btn.addEventListener("click", () => alert("Saving action triggered!"));
+        });
+    </script>
+
+    <script>
+    function updateAllCountdowns() {
+        const countdownItems = document.querySelectorAll(".countdown");
+
+        countdownItems.forEach(item => {
+            const targetDateStr = item.getAttribute("data-target-date");
+            const targetDate = new Date(targetDateStr);
+            const today = new Date();
+
+            // Hitung selisih waktu
+            const diffTime = targetDate - today;
+            const diffDays = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+
+            // Tampilkan ke .days-left di dalam element item
+            const daysLeftSpan = item.querySelector(".days-left");
+            if (daysLeftSpan) {
+                daysLeftSpan.textContent = diffDays;
+            }
+        });
+    }
+
+    // Jalankan saat halaman dibuka
+    updateAllCountdowns();
+</script>
+
+<script>
+        // Tab buttons
+        const tabActive = document.getElementById('tabActive');
+        const tabFinished = document.getElementById('tabFinished');
+
+        function activateTab(tab) {
+            if(tab === 'active') {
+                tabActive.classList.add('bg-blue-100', 'text-blue-900', 'font-bold');
+                tabActive.classList.remove('text-blue-700', 'hover:bg-blue-50');
+
+                tabFinished.classList.remove('bg-blue-100', 'text-blue-900', 'font-bold');
+                tabFinished.classList.add('text-blue-700', 'hover:bg-blue-50');
+                
+                showGoals('active');
+            } else {
+                tabFinished.classList.add('bg-blue-100', 'text-blue-900', 'font-bold');
+                tabFinished.classList.remove('text-blue-700', 'hover:bg-blue-50');
+
+                tabActive.classList.remove('bg-blue-100', 'text-blue-900', 'font-bold');
+                tabActive.classList.add('text-blue-700', 'hover:bg-blue-50');
+                
+                showGoals('finished');
+            }
+        }
+
+        tabActive.addEventListener('click', () => activateTab('active'));
+        tabFinished.addEventListener('click', () => activateTab('finished'));
+
+        // Default tab
+        activateTab('finished'); // karena ini halaman Finished
+        function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+        }
+
+        const activeTab = getQueryParam('tab');
+
+        if (activeTab === 'finished') {
+        activateTab('finished');
+        } else {
+        activateTab('active'); // default tab aktif adalah 'active'
+        }
+    </script>
+</body>
+
+</html>
