@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="flex h-screen overflow-hidden bg-[#CFF1F9]">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+        <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+            <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+        </div>
+
+        <nav class="space-y-2">
+            <a href="dashboardPersonal.html" 
+            class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" />
+                Home
+            </a>
+
+            <a href="myGoalsActive.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" />
+                My Goals
+            </a>
+
+            <!-- ACTIVE MENU -->
+            <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
+                <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" />
+                Report
+            </div>
+
+            <a href="settingPersonal.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
+                Setting
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8 overflow-y-auto">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-3">
+                <img src="D:/Poolin/assets/reportLogo.png" class="w-10 opacity-90" />
+                <div>
+                    <h1 class="text-3xl font-bold text-[#03045E]">Report</h1>
+                    <p class="text-blue-800 -mt-0">Overview of your savings and goal progress</p>
+                </div>
+            </div>
+
+            <!-- Personal/Group Switch -->
+            <div id="toggleSwitch" class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
+                <button id="btnPersonal"
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white text-sm font-semibold">
+                    Personal
+                </button>
+                <button id="btnGroup"
+                    class="px-4 py-1.5 rounded-full text-[#03045E] text-sm font-semibold">
+                    Group
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENT BOX -->
+<div class="bg-gradient-to-b from-[#050691] to-[#0608C4] text-white rounded-2xl p-6">
+
+    <!-- GRID: LEFT (FILTER + CHART + TABLE) | RIGHT (CARDS) -->
+    <div class="grid grid-cols-3 gap-6">
+
+        <!-- LEFT SIDE (span 2 columns) -->
+        <div class="col-span-2 space-y-6">
+
+            <!-- FILTER AREA -->
+            <div class="flex space-x-6">
+                <div>
+                    <label class="text-sm">Date Range</label>
+                    <div class="flex space-x-2 mt-1">
+                        <select class="p-2 rounded-lg text-black mt-1">
+                            <option>January</option>
+                            <option>February</option>
+                            <option>March</option>
+                            <option>April</option>
+                        </select>
+
+                        <select class="p-2 rounded-lg text-black mt-1">
+                            <option>2025</option>
+                            <option>2024</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-sm">All Goals</label>
+                    <div class="flex space-x-2 mt-1"></div>
+                    <select id="goalFilter" class="px-4 py-2 rounded-xl text-black border-gray-300">
+                        <option value="All">All Goals</option>
+                        <option value="Trip Bali">Trip Bali</option>
+                        <option value="Laptop Baru">Laptop Baru</option>
+                        <option value="HP Baru">HP Baru</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- SAVING CHART -->
+            <div class="bg-[#02153F] rounded-xl p-6 shadow">
+                <h3 class="text-center text-lg font-semibold mb-4 text-white">Saving Chart</h3>
+
+                <div class="bg-white/10 p-4 rounded-xl">
+                    <canvas id="savingChart" class="w-full h-64"></canvas>
+                </div>
+            </div>
+
+    </div>
+            <!-- RIGHT SIDE CARDS -->
+        <div class="space-y-6">
+
+            <!-- Total Savings Added -->
+            <div class="bg-[#CDE6FF] text-[#001233] rounded-2xl p-7 shadow flex items-center gap-4">
+                <div class=" w-12 h-12 rounded-xl flex items-center justify-center ">
+                    <img src="D:/Poolin/assets/money-bag.png" class="w-14 opacity-80">
+                </div>
+                <div>
+                    <p class="text-sm font-medium">Total Savings Added</p>
+                    <p class="text-2xl font-bold">Rp 20.500.000</p>
+                </div>
+            </div>
+
+            <!-- Finished Goals -->
+            <div class="bg-[#CDE6FF] text-[#001233] rounded-2xl p-7 shadow flex items-center gap-4">
+                <div class=" w-12 h-12 rounded-xl flex items-center justify-center ">
+                    <img src="D:/Poolin/assets/target.png" class="w-14 opacity-80">
+                </div>
+                <div>
+                    <p class="text-sm font-medium">Total Finished Goals</p>
+                    <p class="text-3xl font-bold">5</p>
+                </div>
+            </div>
+
+            <!-- Expenditure -->
+            <div class="bg-[#CDE6FF] text-[#001233] rounded-2xl p-7 shadow flex items-center gap-4">
+                <div class=" w-12 h-12 rounded-xl flex items-center justify-center">
+                    <img src="D:/Poolin/assets/spending.png" class="w-14 opacity-80">
+                </div>
+                <div>
+                    <p class="text-sm font-medium">Total Expenditure</p>
+                    <p class="text-xl font-bold">Rp 1.000.000</p>
+                </div>
+            </div>
+
+        </div>
+
+</div>
+<!-- FULL-WIDTH TABLE -->
+            <div class="mt-8">
+                <div class="bg-[#E2F4FF] rounded-2xl shadow overflow-hidden w-full">
+                <table class="w-full table-auto text-center text-[#001233]">
+                    <thead class="bg-[#CDE6FF]">
+                        <tr class="border-b border-[#9bbcd1]">
+                            <th class="py-3 font-semibold">Date</th>
+                            <th class="py-3 font-semibold">Goal</th>
+                            <th class="py-3 font-semibold">Transaction</th>
+                            <th class="py-3 font-semibold">Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="border-b border-[#bcd8ea]">
+                            <td class="py-3">03/03/2025</td>
+                            <td class="py-3">Trip Bali</td>
+                            <td class="py-3">Saving</td>
+                            <td class="py-3 font-semibold">Rp 200.000</td>
+                        </tr>
+
+                        <tr class="border-b border-[#bcd8ea]">
+                            <td class="py-3">05/03/2025</td>
+                            <td class="py-3">Laptop Baru</td>
+                            <td class="py-3">Saving</td>
+                            <td class="py-3 font-semibold">Rp 300.000</td>
+                        </tr>
+
+                        <tr>
+                            <td class="py-3">18/03/2025</td>
+                            <td class="py-3">HP Baru</td>
+                            <td class="py-3">Saving</td>
+                            <td class="py-3 font-semibold">Rp 500.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const goalFilter = document.getElementById("goalFilter"); // dropdown All Goals
+
+    function getTransactions() {
+        return JSON.parse(localStorage.getItem("transactions") || "[]");
+    }
+
+    let chart;
+
+    function updateChart() {
+        const transactions = getTransactions();
+        const selectedGoal = goalFilter.value;
+
+        let labels = [];
+        let amounts = [];
+
+        if (selectedGoal === "All") {
+
+            // Group by goal
+            const grouped = {};
+
+            transactions.forEach(t => {
+                if (!grouped[t.goal]) grouped[t.goal] = 0;
+                grouped[t.goal] += t.amount;
+            });
+
+            labels = Object.keys(grouped);
+            amounts = Object.values(grouped);
+
+        } else {
+
+            // Filter by selected goal → show date-based chart
+            const filtered = transactions.filter(t => t.goal === selectedGoal);
+
+            labels = filtered.map(t => t.date);
+            amounts = filtered.map(t => t.amount);
+        }
+
+        // Render Chart
+        if (chart) chart.destroy();
+
+        chart = new Chart(document.getElementById("savingChart"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: amounts,
+                    backgroundColor: "rgba(255,255,255,0.9)",
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false }},
+                scales: {
+                    x: { ticks: { color: "white" }},
+                    y: { ticks: { color: "white" }}
+                }
+            }
+        });
+    }
+
+    // Init
+    document.addEventListener("DOMContentLoaded", updateChart);
+    goalFilter.addEventListener("change", updateChart);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings - Poolin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="flex h-screen overflow-hidden bg-[#CFF1F9]">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+    <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+      <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+    </div>
+
+    <nav class="space-y-2">
+      <a href="dashboardPersonal.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" /> Home
+      </a>
+      <a href="myGoalsActive.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" /> My Goals
+      </a>
+      <a href="reportPersonal.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" /> Report
+      </a>
+      <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
+        <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" /> Setting
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+<main class="flex-1 p-10 overflow-y-auto">
+
+  <!-- HEADER -->
+  <div class="flex justify-between items-center mb-10">
+    <div class="flex items-center gap-4">
+      <img src="D:/Poolin/assets/settings.png" class="w-12 opacity-90" />
+      <div>
+        <h1 class="text-3xl font-bold text-[#03045E] leading-tight">Settings</h1>
+        <p class="text-blue-800 text-sm">Manage your preferences and account</p>
+      </div>
+    </div>
+
+    <div class="flex gap-4">
+      <button class="px-6 py-2 bg-gray-300 text-[#03045E] rounded-xl font-semibold 
+                     hover:bg-gray-400 transition">
+        Cancel
+      </button>
+      <button class="px-6 py-2 bg-gradient-to-r from-[#023E8A] to-[#03045E] 
+                     text-white rounded-xl font-semibold hover:opacity-90 transition">
+        Save Changes
+      </button>
+    </div>
+  </div>
+
+  <!-- SETTINGS (VERTICAL STACK) -->
+<div class="flex flex-col gap-6 max-w-4xl mx-auto">
+
+  <!-- Account Settings -->
+  <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5 
+              flex items-center gap-5 hover:shadow-xl transition cursor-pointer">
+    <i class="fas fa-user-cog text-3xl text-[#03045E]"></i>
+    <div>
+      <h2 class="text-lg font-bold text-[#03045E]">Account Settings</h2>
+      <p class="text-gray-600 text-sm">
+        Update profile details, change password, and manage login preferences.
+      </p>
+    </div>
+  </div>
+
+  <!-- Group Settings -->
+  <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5 
+              flex items-center gap-5 hover:shadow-xl transition cursor-pointer">
+    <i class="fas fa-users text-3xl text-[#03045E]"></i>
+    <div>
+      <h2 class="text-lg font-bold text-[#03045E]">Group Settings</h2>
+      <p class="text-gray-600 text-sm">
+        Manage shared saving rooms, permissions, and group notifications.
+      </p>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5 
+              flex items-center gap-5 hover:shadow-xl transition cursor-pointer">
+    <i class="fas fa-bell text-3xl text-[#03045E]"></i>
+    <div>
+      <h2 class="text-lg font-bold text-[#03045E]">Notifications</h2>
+      <p class="text-gray-600 text-sm">
+        Customize app alerts, reminders, and updates for personal and group savings.
+      </p>
+    </div>
+  </div>
+
+  <!-- Appearance -->
+  <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5 
+              flex items-center gap-5 hover:shadow-xl transition cursor-pointer">
+    <i class="fas fa-paint-brush text-3xl text-[#03045E]"></i>
+    <div>
+      <h2 class="text-lg font-bold text-[#03045E]">Appearance</h2>
+      <p class="text-gray-600 text-sm">
+        Configure financial summaries, reporting preferences, and export saving data.
+      </p>
+    </div>
+  </div>
+
+  <!-- Help & Support -->
+  <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5 
+              flex items-center gap-5 hover:shadow-xl transition cursor-pointer">
+    <i class="fas fa-question-circle text-3xl text-[#03045E]"></i>
+    <div>
+      <h2 class="text-lg font-bold text-[#03045E]">Help & Support</h2>
+      <p class="text-gray-600 text-sm">
+        Get assistance, read FAQs, or contact the support team.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+  </div>
+</main>
+
+</body>
+</html>

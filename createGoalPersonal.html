@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="flex h-screen overflow-hidden bg-[#CFF1F9]">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+        <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+            <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+        </div>
+
+        <nav class="space-y-2">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" />
+                Home
+            </a>
+
+            <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
+                <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" />
+                My Goals
+            </div>
+
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" />
+                Report
+            </a>
+
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
+                Setting
+            </a>
+        </nav>
+    </aside>
+
+            <!-- MAIN CONTENT -->
+    <div class="flex-1 p-10 overflow-auto">
+
+        <!-- TITLE BAR -->
+        <div class="text-3xl font-bold text-[#050691] mb-6">
+            Create a New Goal
+        </div>
+
+        <!-- FORM CARD -->
+        <div class="bg-white shadow-lg rounded-2xl p-8">
+
+            <!-- GRID 2 KOLOM -->
+            <div class="grid grid-cols-2 gap-8">
+
+                <!-- KOLOM KIRI -->
+                <div class="space-y-5">
+
+                    <div class="flex flex-col">
+                        <label class="font-semibold mb-1">Goal Name</label>
+                        <input required type="text" placeholder="Your Goals"
+                            class="p-3 border rounded-xl focus:ring-2 focus:ring-blue-400">
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label class="font-semibold mb-1">Target Date</label>
+                        <input required type="date"
+                            class="p-3 border rounded-xl focus:ring-2 focus:ring-blue-400">
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label class="font-semibold mb-1">Target Amount (Rp)</label>
+                        <input required type="number" placeholder="e.g., 10000000"
+                            class="p-3 border rounded-xl focus:ring-2 focus:ring-blue-400">
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label class="font-semibold mb-1">Upload Photo</label>
+                        <input required type="file" accept="image/*"
+                            class="p-2 border rounded-xl bg-gray-50">
+                    </div>
+
+                </div>
+
+                <!-- KOLOM KANAN (DESKRIPSI) -->
+                <div class="flex flex-col h-full">
+                    <label class="font-semibold mb-1">Description</label>
+                    <textarea required placeholder="Describe your goal..."
+                        class="p-4 border rounded-xl h-full min-h-[300px] resize-none focus:ring-2 focus:ring-blue-400"></textarea>
+                </div>
+
+            </div>
+
+            <!-- BUTTON AREA CENTERED -->
+            <div class="flex justify-center gap-6 mt-10">
+                <button id="saveBtn" type="button"
+                    class="px-8 py-3 bg-[#050691] text-white rounded-xl font-bold hover:bg-[#03045E] transition">
+                    Save
+                </button>
+
+                <a href="myGoalsActive.html"
+                class="px-8 py-3 bg-gray-300 text-black rounded-xl font-bold hover:bg-gray-400 transition">
+                Cancel
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+    function validateForm() {
+        const name = document.getElementById("goalName").value.trim();
+        const date = document.getElementById("targetDate").value;
+        const amount = document.getElementById("targetAmount").value;
+        const desc = document.getElementById("description").value.trim();
+        const photo = document.getElementById("goalPhoto").files.length;
+
+        if (!name || !date || !amount || !desc || photo === 0) {
+            alert("All fields must be filled!");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<script>
+    document.getElementById("saveBtn").addEventListener("click", function () {
+
+        // ambil semua input yang required
+        const requiredFields = document.querySelectorAll("input[required], textarea[required]");
+        let allFilled = true;
+
+        requiredFields.forEach(field => {
+            if (!field.value || field.value.trim() === "") {
+                allFilled = false;
+                field.classList.add("border-red-500");
+            } else {
+                field.classList.remove("border-red-500");
+            }
+        });
+
+        if (!allFilled) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        // Jika semua sudah terisi → redirect
+        window.location.href = "myGoalsActive.html"; // Ubah sesuai tujuanmu
+    });
+</script>
+
+</body>
+</html>

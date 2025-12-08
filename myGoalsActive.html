@@ -18,7 +18,8 @@
         </div>
 
         <nav class="space-y-2">
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+            <a href="dashboardPersonal.html" 
+            class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
                 <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" />
                 Home
             </a>
@@ -28,12 +29,14 @@
                 My Goals
             </div>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+            <a href="reportPersonal.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
                 <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" />
                 Report
             </a>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
+            <a href="settingPersonal.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
                 <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
                 Setting
             </a>
@@ -80,7 +83,7 @@
             </div>
             <button
                 class="px-5 py-2 bg-[#0608C4] hover:bg-[#050691] transition text-white rounded-xl font-semibold shadow cursor-pointer">
-                + Create a New Goal
+                <a href="createGoalPersonal.html" class="block w-full h-full">+ Create a New Goal</a>
             </button>
         </div>
 
@@ -88,7 +91,7 @@
         <div class="max-w-[1150px] mx-auto h-[70vh] overflow-y-auto space-y-6 pr-2">
 
             <!-- CARD TEMPLATE -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 w-full">
+            <div class="goal-card bg-white rounded-2xl shadow-lg border border-gray-200 p-5 w-full" data-id="1">
                 <div class="flex items-start gap-5">
                     <img src="D:/Poolin/assets/bali.jpeg" class="w-24 h-24 rounded-xl object-cover">
 
@@ -102,8 +105,8 @@
                             </div>
 
                             <div class="flex gap-3 text-[#03045E]">
-                                <button class="text-lg"><i class="fa-regular fa-pen-to-square"></i></button>
-                                <button class="text-lg"><i class="fa-regular fa-trash-can"></i></button>
+                                <button class="text-lg edit-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button class="text-lg delete-btn"><i class="fa-regular fa-trash-can"></i></button>
                             </div>
                         </div>
 
@@ -145,13 +148,12 @@
 
                 <button
                     class="w-full mt-5 bg-gradient-to-r from-[#023E8A] to-[#03045E] text-white py-2 text-base rounded-xl font-bold save-btn">
-                    Save Now
+                    <a href="transactionPersonal.html" class="block w-full h-full">Save Now</a>
                 </button>
             </div>
 
             <!-- CARD 2 -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 w-full">
-
+            <div class="goal-card bg-white rounded-2xl shadow-lg border border-gray-200 p-5 w-full" data-id="2">
                 <div class="flex items-start gap-5">
                     <img src="D:/Poolin/assets/laptop.jpg" class="w-24 h-24 rounded-xl object-cover">
 
@@ -163,10 +165,9 @@
                                     <span class="days-left"></span> days left • Target: 2026-09-10
                                 </p>
                             </div>
-
                             <div class="flex gap-3 text-[#03045E]">
-                                <button class="text-lg"><i class="fa-regular fa-pen-to-square"></i></button>
-                                <button class="text-lg"><i class="fa-regular fa-trash-can"></i></button>
+                            <button class="text-lg edit-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+                            <button class="text-lg delete-btn"><i class="fa-regular fa-trash-can"></i></button>
                             </div>
                         </div>
 
@@ -208,7 +209,7 @@
 
                 <button
                     class="w-full mt-5 bg-gradient-to-r from-[#023E8A] to-[#03045E] text-white py-2 text-base rounded-xl font-bold save-btn">
-                    Save Now
+                    <a href="transactionPersonal.html" class="block w-full h-full">Save Now</a>
                 </button>
             </div>
 
@@ -264,48 +265,75 @@
 </script>
 
 <script>
-        // Tab buttons
-        const tabActive = document.getElementById('tabActive');
-        const tabFinished = document.getElementById('tabFinished');
+    // Tab buttons
+    const tabActive = document.getElementById('tabActive');
+    const tabFinished = document.getElementById('tabFinished');
 
-        function activateTab(tab) {
-            if(tab === 'active') {
-                tabActive.classList.add('bg-blue-100', 'text-blue-900', 'font-bold');
-                tabActive.classList.remove('text-blue-700', 'hover:bg-blue-50');
+    function activateTab(tab) {
+        if(tab === 'active') {
+            tabActive.classList.add('bg-blue-100', 'text-blue-900', 'font-bold');
+            tabActive.classList.remove('text-blue-700', 'hover:bg-blue-50');
 
-                tabFinished.classList.remove('bg-blue-100', 'text-blue-900', 'font-bold');
-                tabFinished.classList.add('text-blue-700', 'hover:bg-blue-50');
-                
-                showGoals('active');
-            } else {
-                tabFinished.classList.add('bg-blue-100', 'text-blue-900', 'font-bold');
-                tabFinished.classList.remove('text-blue-700', 'hover:bg-blue-50');
+            tabFinished.classList.remove('bg-blue-100', 'text-blue-900', 'font-bold');
+            tabFinished.classList.add('text-blue-700', 'hover:bg-blue-50');
+            
+            showGoals('active');
+        } else {
+            tabFinished.classList.add('bg-blue-100', 'text-blue-900', 'font-bold');
+            tabFinished.classList.remove('text-blue-700', 'hover:bg-blue-50');
 
-                tabActive.classList.remove('bg-blue-100', 'text-blue-900', 'font-bold');
-                tabActive.classList.add('text-blue-700', 'hover:bg-blue-50');
-                
-                showGoals('finished');
-            }
+            tabActive.classList.remove('bg-blue-100', 'text-blue-900', 'font-bold');
+            tabActive.classList.add('text-blue-700', 'hover:bg-blue-50');
+            
+            showGoals('finished');
         }
+    }
 
-        tabActive.addEventListener('click', () => activateTab('active'));
-        tabFinished.addEventListener('click', () => activateTab('finished'));
+    tabActive.addEventListener('click', () => activateTab('active'));
+    tabFinished.addEventListener('click', () => activateTab('finished'));
 
-        // Default tab
-        activateTab('finished'); // karena ini halaman Finished
-        function getQueryParam(param) {
+    // Ambil query param
+    function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
-        }
+    }
 
-        const activeTab = getQueryParam('tab');
+    const activeTab = getQueryParam('tab');
 
-        if (activeTab === 'finished') {
+    // Tentukan tab awal
+    if (activeTab === 'finished') {
         activateTab('finished');
-        } else {
-        activateTab('active'); // default tab aktif adalah 'active'
-        }
-    </script>
+    } else {
+        activateTab('active');  // default
+    }
+</script>
+
+<script>
+    // ========== DELETE GOAL ==========
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const card = btn.closest(".goal-card"); // cari kartu
+            const goalName = card.querySelector("h2").textContent;
+
+            if (confirm(`Delete goal "${goalName}" permanently?`)) {
+                card.remove(); // hilangkan dari halaman
+                alert("Goal deleted successfully!");
+            }
+        });
+    });
+
+    // ========== UPDATE GOAL ==========
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const card = btn.closest(".goal-card");
+            const goalID = card.getAttribute("data-id");
+
+            // redirect ke halaman update
+            window.location.href = `createGoalPersonal.html?id=${goalID}`;
+        });
+    });
+</script>
+
 </body>
 
 </html>
