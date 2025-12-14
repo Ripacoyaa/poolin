@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('user_id')->constrained('users'); // owner / pembuat room
+    $table->foreignId('user_id')->constrained('users'); // tabungan / pembuat room
     $table->string('nama_room');
     $table->string('kode_room')->unique();              // <-- penting buat join pakai kode
     $table->text('deskripsi')->nullable();

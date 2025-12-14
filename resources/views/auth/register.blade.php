@@ -238,10 +238,13 @@
             @csrf
 
             <div class="form-group">
-                <div class="label">Username</div>
+                <div class="label">Name</div>
                 <div class="input-row">
                     <span>👤</span>
-                    <input type="text" name="username" placeholder="Enter your username">
+                    <input type="text" name="name" placeholder="Enter your name" value="{{old('name') }}">
+                    @error('name')
+    <div class="text-red-500 text-sm">{{ $message }}</div>
+@enderror
                 </div>
             </div>
 

@@ -6,19 +6,33 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
+
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'nama_room',
-        'kode_room',   // baru
-        'tgl_buat',
         'deskripsi',
+        'kode_room',
+        'user_id',
     ];
 
-     public function tabungans()
+    public function user()
     {
-        return $this->hasMany(Tabungan::class);
+        return $this->belongsTo(User::class); // tabungan
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'room_user') // sesuaikan nama pivot tabel kamu
+        ->withTimestamps();
+}
+
+    // semua tabungan di room (termasuk milik tabungan)
+    public function tabungan()
+{
+    return $this->hasOne(Tabungan::class, 'room_id');
+}
+
+
 }

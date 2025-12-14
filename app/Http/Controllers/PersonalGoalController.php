@@ -41,7 +41,10 @@ class PersonalGoalController extends Controller
     {
     $request->validate([
         'nama' => 'required|string|max:255',
-        'target_tabungan' => 'required|numeric|min:0',    
+        'target_tabungan' => 'required|numeric|min:0',
+        'target_tanggal' => 'nullable|date',    
+        'deskripsi' => 'nullable|string',
+        'foto' => 'nullable|image|max:2048',
     ]);
     
     if ($request->hasFile('foto')) {
@@ -51,12 +54,13 @@ class PersonalGoalController extends Controller
 }
 
         Tabungan::create([
-            'user_id'         => Auth::id(),
-            'room_id'         => null,  
-            'nama'            => $request->nama,     // personal
+            'user_id' => Auth::id(),
+            'nama' => $request->nama,
             'target_tabungan' => $request->target_tabungan,
-            'total_terkumpul' => 0,
-            'status'          => 'active',
+            'target_tanggal' => $request->target_tanggal, // ✅ ini penting
+            'deskripsi' => $request->deskripsi,
+            'foto' => $path ?? null,
+            'status' => 'active',
         ]);
 
         return redirect()->route('personal.goals')
@@ -76,14 +80,19 @@ class PersonalGoalController extends Controller
 
         $request->validate([
         'nama' => 'required|string|max:255',
-        'target_tabungan' => 'required|numeric|min:0',
+        'target_tabungan' => 'required|numeric|min:1',
+        'target_tanggal' => 'nullable|date',
+        'deskripsi' => 'nullable|string',
+        'foto' => 'nullable|image|max:2048',
         'status' => 'required|in:active,finished',
     ]);
 
         $goal->update([
-        'nama'            => $request->nama,
+        'nama' => $request->nama,
         'target_tabungan' => $request->target_tabungan,
-        'status'          => $request->status,
+        'target_tanggal' => $request->target_tanggal, // ✅
+        'deskripsi' => $request->deskripsi,
+        'status' => $request->status,
     ]);
 
     if ($request->hasFile('foto')) {
@@ -148,13 +157,18 @@ class PersonalGoalController extends Controller
         }
 
         // Simpan transaksi
-        Transaksi::create([
-            'tabungan_id'   => $goal->id,
-            'tgl_transaksi' => $request->tgl_transaksi,
-            'nominal'       => $nominal,
-            'jenis'         => $request->jenis,
-            'keterangan'    => $request->keterangan,
-        ]);
+        $jenis = $request->jenis ?? 'saving'; // atau ambil dari tombol/action
+
+Transaksi::create([
+    'user_id'       => Auth::id(),
+    'tabungan_id'   => $goal->id,
+    'nominal'       => $request->nominal,
+    'keterangan'    => $request->keterangan ?? '-',
+    'tgl_transaksi' => now(),
+    'jenis'         => $jenis,                 // ✅ WAJIB
+]);
+
+
 
         // Update total_terkumpul
         if ($request->jenis === 'saving') {

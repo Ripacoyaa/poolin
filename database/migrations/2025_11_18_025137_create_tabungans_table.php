@@ -11,17 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tabungans', function (Blueprint $table) {
-    $table->id(); // ID_Tabungan
-    $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-    $table->foreignId('room_id')->nullable()->constrained('rooms')->onDelete('cascade');
+        Schema::create('tabungan', function (Blueprint $table) {
+    $table->id();
 
-    $table->decimal('target_tabungan', 15, 2);
+    // 1 tabungan per room (shared)
+    $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade')->unique();
+
+    // optional: siapa yang bikin/tabungan
+    $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+
+    $table->decimal('target_tabungan', 15, 2)->default(0);
     $table->decimal('total_terkumpul', 15, 2)->default(0);
     $table->string('status')->default('active');
 
     $table->timestamps();
 });
+
     }
 
     /**
@@ -29,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tabungans');
+        Schema::dropIfExists('tabungan');
     }
 };

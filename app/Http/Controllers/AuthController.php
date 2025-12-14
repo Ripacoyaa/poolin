@@ -54,4 +54,27 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    public function updateProfile(Request $request)
+{
+    $user = $request->user();
+
+    $data = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'username' => ['nullable', 'string', 'max:255'],
+        'email' => ['required', 'email'],
+        'password' => ['nullable', 'confirmed', 'min:8'],
+    ]);
+
+    // kalo password kosong, jangan diupdate
+    if (empty($data['password'])) {
+        unset($data['password']);
+    } else {
+        $data['password'] = bcrypt($data['password']);
+    }
+
+    $user->update($data);
+
+    return back()->with('success', 'Update Information Success!');
+}
 }

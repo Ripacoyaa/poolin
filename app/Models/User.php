@@ -27,4 +27,29 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+public function rooms()
+{
+    return $this->hasMany(Room::class);
+}
+
+public function transaksis()
+{
+    return $this->hasMany(Transaksi::class);
+}
+
+public function room()
+{
+    return $this->belongsToMany(Room::class, 'room_user') // sama pivot
+        ->withTimestamps();
+}
+
+public function getPhotoUrlAttribute()
+{
+    return $this->photo_path
+        ? \Illuminate\Support\Facades\Storage::url($this->photo_path)
+        : asset('images/user.png');
+}
+
 }
