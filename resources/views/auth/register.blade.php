@@ -1,302 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Poolin - Registrasi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Poolin - Registrasi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
+  <!-- Optional: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        body {
-            background: #e6f6ff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Poppins", "ui-sans-serif", "system-ui"] },
+          colors: {
+            dark: '#03045E',
+            mid: '#023E8A',
+            light: '#CFF1F9',
+            g1: '#050691',
+            g2: '#0608C4',
+          }
         }
+      }
+    }
+  </script>
 
-        .wrapper {
-            width: 100%;
-            max-width: 1000px;
-            height: 560px;
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            overflow: hidden;
-        }
-
-        /* LEFT */
-        .left {
-            background: linear-gradient(150deg, #111a78, #1845c6);
-            color: #ffffff;
-            padding: 40px 40px 40px 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .left-top span {
-            font-size: 13px;
-            opacity: 0.8;
-        }
-
-        .left-title {
-            margin-top: 40px;
-            font-size: 28px;
-            line-height: 1.3;
-            font-weight: 700;
-        }
-
-        .left-bottom {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .toggle-auth {
-            margin-top: 24px;
-        }
-
-        .toggle-auth a,
-        .toggle-auth span {
-            background: transparent;
-            border: none;
-            color: #ffffff;
-            font-size: 16px;
-            margin-right: 18px;
-            cursor: pointer;
-            opacity: 0.7;
-            text-decoration: none;
-        }
-
-        .toggle-auth .active {
-            font-weight: 600;
-            opacity: 1;
-            position: relative;
-        }
-
-        .toggle-auth .active::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 100%;
-            height: 3px;
-            border-radius: 999px;
-            background: #ffda7b;
-        }
-
-        /* RIGHT */
-        .right {
-            padding: 40px 56px;
-            background: #e4f7ff;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 32px;
-        }
-
-        .logo-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 12px;
-            background: #1845c6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .logo-text {
-            font-size: 22px;
-            font-weight: 700;
-            color: #163266;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .label {
-            font-size: 13px;
-            color: #4b5878;
-            margin-bottom: 4px;
-        }
-
-        .input-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 0;
-            border-bottom: 1px solid #c8d7f0;
-        }
-
-        .input-row span {
-            font-size: 18px;
-        }
-
-        .input-row input {
-            border: none;
-            outline: none;
-            background: transparent;
-            flex: 1;
-            padding: 6px 0;
-        }
-
-        .policy {
-            margin-top: 6px;
-            font-size: 12px;
-            color: #4b5878;
-        }
-
-        .policy a {
-            color: #1845c6;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .btn-register {
-            width: 100%;
-            margin-top: 18px;
-            padding: 10px 0;
-            border-radius: 999px;
-            border: none;
-            background: linear-gradient(90deg, #1625b0, #2351e3);
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .bottom-text {
-            text-align: center;
-            font-size: 12px;
-            color: #4b5878;
-            margin-top: 14px;
-        }
-
-        .bottom-text a {
-            color: #1845c6;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        @media (max-width: 900px) {
-            .wrapper {
-                max-width: 420px;
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-
-            .left {
-                display: none;
-            }
-
-            .right {
-                padding: 32px 24px;
-            }
-        }
-    </style>
+  <style>
+    body { background-color:#CFF1F9; }
+  </style>
 </head>
-<body>
-<div class="wrapper">
-    {{-- LEFT SIDE --}}
-    <div class="left">
-        <div class="left-top">
-            <span>Smart money starts here</span>
-            <h1 class="left-title">
-                Dream big, save smart,<br>
-                and vibe with your goals<br>
-                Join Poolin and start<br>
-                your money journey today!
-            </h1>
-        </div>
 
-        <div>
-             
-            <div class="left-bottom">
-                Every big goal starts with a single coin.
-            </div>
-        </div>
+<body class="min-h-screen flex font-sans">
+
+  <!-- LEFT PANEL -->
+  <aside class="hidden md:flex w-1/2 bg-gradient-to-b from-g1 to-g2 text-white p-16 flex-col justify-between">
+    <div>
+      <p class="text-sm opacity-80 mb-6">
+        Smart money starts here
+      </p>
+      <h1 class="text-3xl font-bold leading-snug">
+        Dream big, save smart,<br>
+        and vibe with your goals<br>
+        Join Poolin and start<br>
+        your money journey today!
+      </h1>
     </div>
 
-    {{-- RIGHT SIDE (FORM) --}}
-    <div class="right">
-        <div class="logo">
-            <div class="logo-icon">P</div>
-            <div class="logo-text">Poolin</div>
+    <div class="flex justify-center">
+      {{-- ganti path asset sesuai folder public kamu --}}
+      <img src="{{ asset('images/loginPage.png') }}" class="w-60" alt="Illustration">
+    </div>
+
+    <p class="text-sm opacity-80 italic">
+      Every big goal starts with a single coin.
+    </p>
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <main class="w-full md:w-1/2 bg-light flex items-center justify-center px-6">
+    <div class="w-full max-w-[420px] p-8">
+
+      <!-- LOGO (tengah + agak turun dikit biar gak mepet) -->
+      <div class="flex justify-center mb-10 mt-2">
+        <img src="{{ asset('images/logoPoolinGelap.png') }}" class="w-52 h-auto" alt="Poolin Logo">
+      </div>
+
+      {{-- FLASH / ERROR GLOBAL --}}
+      @if ($errors->any())
+        <div class="mb-4 text-sm text-red-700 bg-red-100 border border-red-200 rounded-lg px-4 py-2">
+          {{ $errors->first() }}
+        </div>
+      @endif
+      @if (session('success'))
+        <div class="mb-4 text-sm text-green-700 bg-green-100 border border-green-200 rounded-lg px-4 py-2">
+          {{ session('success') }}
+        </div>
+      @endif
+
+      <!-- FORM -->
+      <form method="POST" action="{{ route('register') }}" class="space-y-6">
+        @csrf
+
+        <!-- NAME -->
+        <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+          <img src="{{ asset('images/logoUser.png') }}" class="w-5 h-5 opacity-70" alt="">
+          <input
+            name="name"
+            required
+            placeholder="Username"
+            class="flex-1 bg-transparent outline-none"
+            value="{{ old('name') }}"
+          >
+        </div>
+        @error('name')
+          <p class="text-xs text-red-600 -mt-4">{{ $message }}</p>
+        @enderror
+
+        <!-- EMAIL (pakai mata) -->
+        <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+          <img src="{{ asset('images/gmail.png') }}" class="w-5 h-5 opacity-70" alt="">
+
+          <input
+            id="emailInput"
+            name="email"
+            type="password"
+            required
+            placeholder="Email"
+            class="flex-1 bg-transparent outline-none"
+            value="{{ old('email') }}"
+          >
+
+          <button type="button" onclick="toggleEmail(this)" class="shrink-0">
+            <img src="{{ asset('images/hidden.png') }}" class="w-5 h-5 opacity-80" alt="toggle email">
+          </button>
+        </div>
+        @error('email')
+          <p class="text-xs text-red-600 -mt-4">{{ $message }}</p>
+        @enderror
+
+        <!-- PASSWORD -->
+        <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+          <img src="{{ asset('images/padlock.png') }}" class="w-5 h-5 opacity-70" alt="">
+
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            placeholder="Password"
+            class="flex-1 bg-transparent outline-none"
+          >
+
+          <button type="button" onclick="togglePassword('password', this)" class="shrink-0">
+            <img src="{{ asset('images/hidden.png') }}" class="w-5 h-5 opacity-80" alt="toggle password">
+          </button>
+        </div>
+        @error('password')
+          <p class="text-xs text-red-600 -mt-4">{{ $message }}</p>
+        @enderror
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+          <img src="{{ asset('images/padlock1.png') }}" class="w-5 h-5 opacity-70" alt="">
+
+          <input
+            id="confirmPassword"
+            name="password_confirmation"
+            type="password"
+            required
+            placeholder="Confirm Password"
+            class="flex-1 bg-transparent outline-none"
+          >
+
+          <button type="button" onclick="togglePassword('confirmPassword', this)" class="shrink-0">
+            <img src="{{ asset('images/hidden.png') }}" class="w-5 h-5 opacity-80" alt="toggle confirm password">
+          </button>
         </div>
 
-        {{-- sementara action-nya #, nanti diganti ke route register POST --}}
-        <form method="POST" action="#">
-            @csrf
+        <!-- AGREEMENT -->
+        <label class="flex items-center gap-2 text-sm text-dark">
+          <input type="checkbox" name="agree" required class="accent-dark">
+          I agree with privacy and policy
+        </label>
 
-            <div class="form-group">
-                <div class="label">Name</div>
-                <div class="input-row">
-                    <span>👤</span>
-                    <input type="text" name="name" placeholder="Enter your name" value="{{old('name') }}">
-                    @error('name')
-    <div class="text-red-500 text-sm">{{ $message }}</div>
-@enderror
-                </div>
-            </div>
+        <!-- REGISTER BUTTON -->
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-b from-g1 to-g2 text-white py-3 rounded-full font-semibold hover:opacity-90 transition"
+        >
+          Registrasi
+        </button>
 
-            <div class="form-group">
-                <div class="label">Email</div>
-                <div class="input-row">
-                    <span>✉️</span>
-                    <input type="email" name="email" placeholder="Enter your email">
-                </div>
-            </div>
+        <p class="text-center text-sm text-dark">
+          Already have an account?
+          <a href="{{ route('login') }}" class="font-semibold underline">
+            Login
+          </a>
+        </p>
 
-            <div class="form-group">
-                <div class="label">Password</div>
-                <div class="input-row">
-                    <span>🔒</span>
-                    <input type="password" name="password" placeholder="Create a password">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="label">Confirm Password</div>
-                <div class="input-row">
-                    <span>🔑</span>
-                    <input type="password" name="password_confirmation" placeholder="Repeat your password">
-                </div>
-            </div>
-
-            <div class="policy">
-                <label>
-                    <input type="checkbox" name="agree">
-                    I agree with <a href="#">privacy</a> and <a href="#">policy</a>
-                </label>
-            </div>
-
-            <button type="submit" class="btn-register">
-                Registrasi
-            </button>
-
-                        @if ($errors->any())
-                <div>{{ $errors->first() }}</div>
-            @endif
-
-            @if (session('success'))
-                <div>{{ session('success') }}</div>
-            @endif
-
-            <div class="bottom-text">
-                Already have an account?
-                <a href="{{ route('login') }}">Login</a>
-            </div>
-        </form>
+      </form>
     </div>
-</div>
+  </main>
+
+<script>
+  function togglePassword(id, btn) {
+    const input = document.getElementById(id);
+    const icon = btn.querySelector("img");
+
+    if (input.type === "password") {
+      input.type = "text";
+      icon.src = "{{ asset('images/eye.png') }}";
+    } else {
+      input.type = "password";
+      icon.src = "{{ asset('images/hidden.png') }}";
+    }
+  }
+
+  function toggleEmail(btn) {
+    const input = document.getElementById("emailInput");
+    const icon = btn.querySelector("img");
+
+    if (input.type === "password") {
+      input.type = "text";
+      icon.src = "{{ asset('images/eye.png') }}";
+    } else {
+      input.type = "password";
+      icon.src = "{{ asset('images/hidden.png') }}";
+    }
+  }
+</script>
+
 </body>
 </html>

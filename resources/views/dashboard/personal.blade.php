@@ -115,10 +115,10 @@
                 @if($goalHighlight)
                     <p class="mt-3 text-blue-900 font-semibold">
                         {{ $goalHighlight->nama }}
-                    </p>
                     <p class="text-sm text-gray-600">
-                        Highest goal progress – {{ $goalHighlight->progress }}%
-                    </p>
+    Highest goal progress – {{ min(100, $goalHighlight->progress) }}%
+</p>
+
                 @else
                     <p class="mt-3 text-gray-500 text-sm">
                         No active goals yet.

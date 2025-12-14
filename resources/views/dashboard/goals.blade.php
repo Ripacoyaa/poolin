@@ -82,13 +82,7 @@
                     onclick="window.location.href='{{ route('personal.goals.create') }}'">
                     + Create a New Goal
                 </button>
-
-                <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit"
-                            class="px-4 py-2 rounded-full border border-[#03045E] text-[#03045E] text-sm font-semibold bg-white hover:bg-blue-50">
-                        Logout
-                    </button>
                 </form>
             </div>
         </div>
@@ -148,7 +142,7 @@
                             <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <h2 class="text-xl font-bold text-[#03045E]">
-                                        {{ $goal->nama ?? 'My Goal' }}
+                                        {{ $goal->nama_goal ?? $goal->nama ?? 'My Goal' }}
                                     </h2>
                                     <p class="text-sm text-gray-500 mt-1">
                                         Status: <span class="font-semibold capitalize">{{ $goal->status ?? 'active' }}</span>

@@ -136,17 +136,6 @@
               class="w-full border rounded-xl p-3 mt-1 bg-gray-200 text-gray-600 cursor-not-allowed outline-none">
           </div>
 
-          <!-- USERNAME -->
-          <div>
-            <label class="font-semibold text-gray-700">Username</label>
-            <input
-              id="usernameInput"
-              type="text"
-              name="username"
-              value="{{ old('username', auth()->user()->username ?? '') }}"
-              readonly
-              class="w-full border rounded-xl p-3 mt-1 bg-gray-200 text-gray-600 cursor-not-allowed outline-none">
-          </div>
 
           <!-- EMAIL -->
           <div>

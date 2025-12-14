@@ -308,10 +308,10 @@
                 @php
                     $u = $row->user;
                     $icon = match($i) {
-                        0 => asset('assets/award.png'),
-                        1 => asset('assets/silver-medal.png'),
-                        2 => asset('assets/bronze.png'),
-                        default => asset('assets/award.png'),
+                        0 => asset('images/award.png'),
+                        1 => asset('images/silver-medal.png'),
+                        2 => asset('images/bronze.png'),
+                        default => asset('images/award.png'),
                     };
                 @endphp
 

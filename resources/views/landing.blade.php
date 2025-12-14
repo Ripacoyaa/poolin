@@ -51,6 +51,20 @@
         .navbar-menu a:hover {
             color: #ffffff;
         }
+        .login-btn {
+    padding: 12px 28px;        /* bikin gede */
+    border-radius: 999px;
+    font-size: 24px;           /* teks lebih besar */
+    font-weight: 700;          /* tebel */
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+    background: #CFF1F9;
+    color: #03045E;
+}
 
         /* HERO */
         .hero {
@@ -62,16 +76,19 @@
         }
 
         .hero-left h1 {
-            font-size: 44px;
-            line-height: 1.2;
-            margin-bottom: 18px;
+    font-size: 64px;        /* lebih gede */
+    line-height: 1.15;
+    margin-bottom: 18px;
+    margin-top: -32px;     /* naik ke atas */
+    font-weight: 750;
+
         }
 
         .hero-left p {
             font-size: 16px;
             line-height: 1.5;
             max-width: 480px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             color: #dbe6ff;
         }
 
@@ -174,14 +191,12 @@
 
     <!-- NAVBAR -->
     <header class="navbar">
-        <div class="navbar-logo">Poolin</div>
-        <nav class="navbar-menu">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
-            <a href="{{ route('login') }}">Login</a>
-        </nav>
+        <div class="navbar-logo" style="margin-top: 12px;">
+    <img src="{{ asset('images/logoPoolin.png') }}" alt="Logo Poolin" style="width: 200px; height: auto;">
+</div>
+       <nav class="navbar-menu">
+    <a href="{{ route('login') }}" class="login-btn">Login</a>
+</nav>
     </header>
 
     <!-- HERO -->
