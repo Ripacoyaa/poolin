@@ -37,8 +37,8 @@
 
             <a href="settingPersonal.html"
             class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
-                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
-                Setting
+                <img src="D:/Poolin/assets/accountSetting.png" class="w-8 opacity-90" />
+                Account Setting
             </a>
         </nav>
     </aside>
@@ -56,16 +56,22 @@
                 </div>
             </div>
 
-            <!-- Personal/Group Switch -->
-            <div id="toggleSwitch" class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
-                <button id="btnPersonal"
-                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white text-sm font-semibold">
+            <!-- PERSONAL/GROUP SWITCHER -->
+            <div class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
+                
+                <!-- PERSONAL BUTTON -->
+                <button  
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white font-semibold text-sm">  
                     Personal
                 </button>
-                <button id="btnGroup"
-                    class="px-4 py-1.5 rounded-full text-[#03045E] text-sm font-semibold">
+
+                <!-- GROUP BUTTON (ACTIVE) -->
+                <button 
+                    onclick="window.location.href='dashboardGroup.html'" 
+                    class="px-4 py-1.5 rounded-full text-[#03045E] font-semibold text-sm hover:bg-blue-100">
                     Group
                 </button>
+
             </div>
         </div>
 

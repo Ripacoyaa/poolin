@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background-color: #CFF1F9;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden">
+
+<!-- SIDEBAR -->
+<aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+    <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+        <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+    </div>
+
+    <nav class="space-y-2">
+
+        <!-- HOME (NOT ACTIVE) -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]"
+           href="dashboardGroup.html">
+            <img src="D:/Poolin/assets/homePage.png" class="w-8 h-8 opacity90" />
+            <span>Home</span>
+        </a>
+
+        <!-- ACTIVE: MY ROOMS -->
+        <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold 
+                    shadow-[0_4px_12px_rgba(0,0,0,0.25)]">
+            <img src="D:/Poolin/assets/meeting.png" class="w-8 h-8 opacity90" />
+            <span>My Rooms</span>
+        </div>
+
+        <!-- CONTRIBUTION -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]"
+           href="contributionGroup.html">
+            <img src="D:/Poolin/assets/donation.png" class="w-8 h-8 opacity90" />
+            <span>Contribution</span>
+        </a>
+
+        <!-- SETTING -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]"
+           href="settingGroup.html">
+            <img src="D:/Poolin/assets/accountSetting.png" class="w-8 h-8 opacity90" />
+            <span>Account Setting</span>
+        </a>
+
+    </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+    <main class="flex-1 p-8 overflow-y-auto">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-4">
+            
+            <!-- HOME -->
+            <div>
+                <div class="flex items-center gap-2">
+                    <img src="D:/Poolin/assets/community.png" class="w-16 h-16 opacity-90" />
+                    <div>
+                        <h1 class="text-2xl font-bold text-blue-900 leading-tight">
+                            My Rooms
+                        </h1>
+                        <p class="text-blue-800 font-semibold text-sm">
+                            View and manage all your savings room.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONAL/GROUP SWITCHER -->
+            <div class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
+                
+                <!-- PERSONAL BUTTON -->
+                <button 
+                    onclick="window.location.href='dashboardPersonal.html'" 
+                    class="px-4 py-1.5 rounded-full text-[#03045E] font-semibold text-sm hover:bg-blue-100">
+                    Personal
+                </button>
+
+                <!-- GROUP BUTTON (ACTIVE) -->
+                <button 
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white font-semibold text-sm">
+                    Group
+                </button>
+
+            </div>
+        </div>
+
+         <!-- ROOMS GRID (HANYA 1 SAJA) -->
+    <div id="myRoomsList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+</main>
+
+
+<!-- MODAL DELETE -->
+<div id="deleteModal"
+     class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+
+    <div class="bg-white p-6 rounded-xl shadow-xl w-80 text-center">
+        <h2 class="text-xl font-bold text-[#03045E] mb-3">Delete Room?</h2>
+        <p class="text-gray-600 mb-5 text-sm">This action cannot be undone.</p>
+
+        <div class="flex gap-3">
+            <button class="flex-1 bg-gray-300 py-2 rounded-lg hover:bg-gray-400"
+                    onclick="closeDeleteModal()">
+                Cancel
+            </button>
+
+            <button id="confirmDelete"
+                    class="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+<!-- DELETE CONFIRM MODAL -->
+<div id="deleteModal"
+     class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+
+    <div class="bg-white p-6 rounded-xl shadow-xl w-80 text-center">
+
+        <h2 class="text-xl font-bold text-[#03045E] mb-3">Delete Room?</h2>
+        <p class="text-gray-600 mb-5 text-sm">This action cannot be undone.</p>
+
+        <div class="flex gap-3">
+            <button class="flex-1 bg-gray-300 py-2 rounded-lg hover:bg-gray-400"
+                    onclick="closeDeleteModal()">
+                Cancel
+            </button>
+
+            <button id="confirmDelete"
+                    class="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700">
+                Delete
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+let deleteRoomId = null;
+
+function openDeleteModal(btn) {
+    deleteRoomId = btn.getAttribute("data-id");
+    document.getElementById("deleteModal").classList.remove("hidden");
+}
+
+function closeDeleteModal() {
+    document.getElementById("deleteModal").classList.add("hidden");
+    deleteRoomId = null;
+}
+
+document.getElementById("confirmDelete").onclick = () => {
+    if (!deleteRoomId) return;
+
+    // ambil data lama
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+
+    // filter -> buang room yang cocok
+    rooms = rooms.filter(room => room.id != deleteRoomId);
+
+    // simpan kembali
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+
+    // tutup modal
+    closeDeleteModal();
+
+    // reload tampilan
+    location.reload();
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const list = document.getElementById("myRoomsList");
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+
+    // Jika tidak ada room
+    if (rooms.length === 0) {
+        list.innerHTML = `
+            <p class="text-center text-gray-500 mt-5">No rooms found.</p>
+        `;
+        return;
+    }
+
+    rooms.forEach(room => {
+
+        const name = room.name || "Untitled Room";
+        const freq = room.frequency || "Not Set";
+        const members = Array.isArray(room.members)
+        ? room.members.length
+        : (Number(room.members) || 1);
+        const target = Number(room.target || 0);
+        const current = Number(room.currentAmount || 0);
+
+        const percent = target > 0 ? Math.min((current / target) * 100, 100) : 0;
+
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-xl p-5 shadow-md border border-[#BFDFFB] relative";
+
+        card.innerHTML = `
+            <div class="absolute right-3 top-3 flex gap-2">
+                <button onclick="window.location.href='editRoomsGroup.html?id=${room.id}'"
+                    class="text-blue-700 hover:text-blue-900 text-sm font-semibold">
+                    Edit
+                </button>
+                <button onclick="openDeleteModal(this)" data-id="${room.id}"
+                    class="text-red-600 hover:text-red-800 text-sm font-semibold">
+                    Delete
+                </button>
+            </div>
+
+            <h2 class="text-xl font-bold text-[#03045E]">${name}</h2>
+            <p class="text-gray-600 text-sm">${freq} – ${members} members</p>
+
+            <span class="inline-block mt-2 bg-[#0077B6] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                Active
+            </span>
+
+            <div class="w-full h-3 bg-gray-200 rounded-full mt-3">
+                <div class="h-full bg-[#0077B6] rounded-full" style="width: ${percent}%;"></div>
+            </div>
+
+            <p class="mt-3 text-[#012A4A] font-semibold">
+                Rp${current.toLocaleString()} 
+                <span class="text-gray-500 font-normal">of Rp${target.toLocaleString()}</span>
+            </p>
+
+            <button onclick="window.location.href='roomDetailGroup.html?id=${room.id}'"
+                class="mt-4 w-full bg-[#023E8A] hover:bg-[#0353A4] text-white font-semibold py-2 rounded-lg">
+                View Room
+            </button>
+        `;
+
+        list.appendChild(card);
+    });
+});
+</script>
+
+    </body>
+</html>

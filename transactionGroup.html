@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-color: #CFF1F9;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden">
+
+<!-- SIDEBAR -->
+<aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+    <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+        <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+    </div>
+
+    <nav class="space-y-2">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A]"
+           href="dashboardGroup.html">
+            <img src="D:/Poolin/assets/homePage.png" class="w-8 h-8" />
+            <span>Home</span>
+        </a>
+
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A]"
+           href="myRoomsGroup.html">
+            <img src="D:/Poolin/assets/meeting.png" class="w-8 h-8" />
+            <span>My Rooms</span>
+        </a>
+
+        <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold">
+            <img src="D:/Poolin/assets/donation.png" class="w-8 h-8" />
+            <span>Contribution</span>
+        </div>
+
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A]"
+           href="settingGroup.html">
+            <img src="D:/Poolin/assets/accountSetting.png" class="w-8 h-8" />
+            <span>Account Setting</span>
+        </a>
+    </nav>
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 p-4 overflow-y-auto">
+
+    <!-- GOAL HEADER -->
+    <div class="flex items-center gap-5 bg-[#E4F1FF] p-4 rounded-xl border border-blue-200 shadow mb-6">
+        <img src="D:/Poolin/assets/bali.jpeg" class="w-24 h-20 rounded-xl object-cover">
+        <div>
+            <h2 class="text-2xl font-bold text-[#03045E]">Save to : Liburan Bali</h2>
+            <p class="text-gray-700">Target : Rp 10.000.000</p>
+            <p class="text-gray-700">Progress : 87%</p>
+        </div>
+    </div>
+
+    <!-- TRANSACTION BOX -->
+    <div class="bg-white p-6 rounded-2xl shadow-xl border w-full">
+
+        <div class="flex items-center gap-3 mb-4">
+            <h2 class="text-2xl font-bold text-[#03045E]">Transaction</h2>
+            <div class="h-6 w-[2px] bg-[#03045E] opacity-40"></div>
+            <h2 id="transactionType" class="text-xl font-semibold text-[#03045E]">Saving</h2>
+        </div>
+
+        <!-- TABS -->
+<div class="flex mb-5 h-10">
+    <button id="btnSaving" onclick="setActiveTab('saving')" 
+        class="flex-1 bg-[#023E8A] text-white font-semibold rounded-l-xl">
+        Saving
+    </button>
+
+    <button id="btnWithdraw" onclick="setActiveTab('withdraw')" 
+        class="flex-1 bg-blue-100 text-[#03045E] font-semibold rounded-r-xl">
+        Withdraw
+    </button>
+</div>
+
+<!-- SAVING SECTION -->
+<div id="savingSection">
+
+    <div>
+        <label class="font-semibold text-gray-700">Date</label>
+        <input id="dateInputSaving" type="date"
+               class="w-full border rounded-lg p-2 mt-1"
+               readonly required>
+    </div>
+
+    <div>
+        <label class="font-semibold text-gray-700">Amount (Rp)</label>
+        <input 
+            id="amountSaving"
+            type="text"
+            inputmode="numeric"
+            class="w-full border rounded-lg p-2 mt-1"
+            oninput="formatRupiah(this)"
+            required>
+    </div>
+
+    <div>
+        <label class="font-semibold text-gray-700">Upload Photo</label>
+        <input 
+            id="photoSaving"
+            type="file"
+            accept="image/*"
+            class="w-full border rounded-lg p-2 bg-gray-50 mt-1"
+            required>
+    </div>
+
+    <div>
+        <label class="font-semibold text-gray-700">Note</label>
+        <textarea 
+            id="noteSaving"
+            class="w-full border rounded-lg p-2 mt-1 h-20">
+        </textarea>
+    </div>
+</div>
+
+<!-- WITHDRAW SECTION -->
+<div id="withdrawSection" style="display:none;">
+
+    <div>
+        <label class="font-semibold text-gray-700">Date</label>
+        <input id="dateInputWithdraw" type="date"
+               class="w-full border rounded-lg p-2 mt-1"
+               readonly required>
+    </div>
+
+    <div>
+        <label class="font-semibold text-gray-700">Amount (Rp)</label>
+        <input 
+            id="amountWithdraw"
+            type="text"
+            inputmode="numeric"
+            class="w-full border rounded-lg p-2 mt-1"
+            oninput="formatRupiah(this)"
+            required>
+    </div>
+
+    <div>
+        <label class="font-semibold text-gray-700">Upload Photo</label>
+        <input 
+            id="photoWithdraw"
+            type="file"
+            accept="image/*"
+            class="w-full border rounded-lg p-2 bg-gray-50 mt-1"
+            required>
+    </div>
+
+    <div>
+        <label class="font-semibold text-gray-700">Note</label>
+        <textarea 
+            id="noteWithdraw"
+            class="w-full border rounded-lg p-2 mt-1 h-20"
+            required>
+        </textarea>
+    </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="flex gap-4 mt-6">
+    <button onclick="submitForm()" 
+    class="w-1/2 py-2 bg-[#03045E] text-white text-center rounded-xl font-bold">
+        Save
+    </button>
+
+    <a href="contributionGroup.html"
+       class="w-1/2 py-2 bg-gray-300 text-gray-800 text-center rounded-xl font-bold">
+        Cancel
+    </a>
+</div>
+
+</main>
+
+<!-- SCRIPT -->
+<script>
+// SET TODAY'S DATE UNTUK KEDUA TAB
+const today = new Date().toISOString().split("T")[0];
+document.getElementById("dateInputSaving").value = today;
+document.getElementById("dateInputWithdraw").value = today;
+
+
+// TAB FUNCTION
+function setActiveTab(tab) {
+    const savingBtn = document.getElementById("btnSaving");
+    const withdrawBtn = document.getElementById("btnWithdraw");
+
+    const savingSection = document.getElementById("savingSection");
+    const withdrawSection = document.getElementById("withdrawSection");
+
+    if (tab === "withdraw") {
+
+        withdrawBtn.classList.add("bg-[#023E8A]", "text-white");
+        withdrawBtn.classList.remove("bg-blue-100", "text-[#03045E]");
+
+        savingBtn.classList.remove("bg-[#023E8A]", "text-white");
+        savingBtn.classList.add("bg-blue-100", "text-[#03045E]");
+
+        savingSection.style.display = "none";
+        withdrawSection.style.display = "block";
+
+        document.getElementById("transactionType").textContent = "Withdraw";
+
+    } else {
+
+        savingBtn.classList.add("bg-[#023E8A]", "text-white");
+        savingBtn.classList.remove("bg-blue-100", "text-[#03045E]");
+
+        withdrawBtn.classList.remove("bg-[#023E8A]", "text-white");
+        withdrawBtn.classList.add("bg-blue-100", "text-[#03045E]");
+
+        savingSection.style.display = "block";
+        withdrawSection.style.display = "none";
+
+        document.getElementById("transactionType").textContent = "Saving";
+    }
+}
+
+
+// OPEN TAB BASED ON URL PARAM (?type=withdraw)
+window.onload = () => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+
+    if (type === "withdraw") setActiveTab("withdraw");
+    else setActiveTab("saving");
+};
+
+// POPUP SUCCESS
+function showSuccessPopup() {
+    const popup = document.createElement("div");
+    popup.className =
+        "fixed top-5 right-5 bg-green-500 text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-3";
+    popup.innerHTML = `<span class="text-2xl">✔</span> <span class="font-semibold">Transaction Saved Successfully!</span>`;
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+        popup.remove();
+        window.location.href = "contributionGroup.html";
+    }, 1500);
+}
+</script>
+<script>
+function getNumberFromRupiah(text) {
+    return Number(text.replace(/[^0-9]/g, ""));
+}
+
+function submitForm() {
+    const isWithdraw = document.getElementById("withdrawSection").style.display === "block";
+
+    const amountInput = isWithdraw
+        ? document.getElementById("amountWithdraw")
+        : document.getElementById("amountSaving");
+
+    const amount = getNumberFromRupiah(amountInput.value);
+    if (!amount || amount <= 0) {
+        alert("Amount tidak valid");
+        return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get("id");
+
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+    const roomIndex = rooms.findIndex(r => r.id == roomId);
+
+    if (roomIndex === -1) {
+        alert("Room tidak ditemukan");
+        return;
+    }
+
+    // INIT nilai jika belum ada
+    rooms[roomIndex].currentAmount ??= 0;
+    rooms[roomIndex].myContribution ??= 0;
+    rooms[roomIndex].myBalance ??= 0;
+
+    if (isWithdraw) {
+        rooms[roomIndex].currentAmount -= amount;
+        rooms[roomIndex].myBalance -= amount;
+    } else {
+        rooms[roomIndex].currentAmount += amount;
+        rooms[roomIndex].myContribution += amount;
+        rooms[roomIndex].myBalance += amount;
+    }
+
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+
+    showSuccessPopup();
+}
+</script>
+
+<script>
+function formatRupiah(input) {
+    let value = input.value.replace(/[^0-9]/g, "");
+
+    if (value === "") {
+        input.value = "";
+        return;
+    }
+
+    let formatted = new Intl.NumberFormat("id-ID").format(value);
+    input.value = "Rp " + formatted;
+}
+</script>
+
+</body>
+</html>

@@ -16,13 +16,13 @@
     </div>
 
     <nav class="space-y-2">
-      <a href="dashboardPersonal.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+      <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
         <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" /> Home
       </a>
-      <a href="myGoalsActive.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+      <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
         <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" /> My Goals
       </a>
-      <a href="reportPersonal.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+      <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
         <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" /> Report
       </a>
       <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
@@ -37,59 +37,6 @@
 
     <div class="max-w-full mx-auto flex flex-col gap-6">
 
-      <!-- LOGOUT POPUP -->
-      <div id="logoutPopup"
-        class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
-
-        <div class="bg-white w-80 rounded-xl shadow-lg p-6 text-center">
-          <h2 class="text-xl font-bold mb-3">Logout?</h2>
-          <p class="text-gray-600 mb-5">Are you sure you want to logout?</p>
-
-          <div class="flex justify-between gap-3">
-            <button id="cancelLogout"
-              class="flex-1 bg-gray-300 text-black py-2 rounded-xl hover:bg-gray-400 transition">
-              Cancel
-            </button>
-
-            <button id="confirmLogout"
-              class="flex-1 bg-red-600 text-white py-2 rounded-xl hover:bg-red-700 transition">
-              Yes, Logout
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOP BAR WITH LOGOUT -->
-      <div class="flex justify-end w-full">
-        <button id="logoutBtn"
-          class="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">
-          <i class="fa-solid fa-right-from-bracket"></i> Logout
-        </button>
-      </div>
-
-
-      <!-- PROFILE CARD -->
-      <div class="bg-white shadow-lg rounded-2xl border border-blue-100 p-6 w-full">
-
-        <div class="flex justify-between items-center w-full">
-          <div class="flex items-center gap-4">
-            <img src="D:/Poolin/assets/user.png"
-                 class="w-20 h-20 rounded-full object-cover shadow-md main-profile">
-            <div>
-              <h2 id="profileName" class="text-2xl font-bold text-[#03045E]">
-                maria123
-              </h2>
-            </div>
-          </div>
-
-          <button id="openModal"
-            class="px-6 py-2 bg-[#1A1A7E] text-white font-semibold rounded-xl hover:bg-[#0F0F6A] shadow">
-            Change Photo Profile
-          </button>
-        </div>
-
-      </div>
-
       <!-- FORM CARD -->
       <div class="bg-white shadow-lg rounded-2xl border border-blue-100 p-6 w-full">
 
@@ -98,38 +45,75 @@
         </h3>
 
         <!-- FORM -->
-<form id="settingForm" class="space-y-4">
+        <form id="settingForm" class="space-y-4">
 
-  <!-- USERNAME -->
-  <div>
-    <label class="font-semibold text-gray-700">Username</label>
-    <input 
-      type="text"
-      value="maria123"
-      class="w-full border rounded-xl p-3 mt-1 bg-gray-200 text-gray-600 cursor-default"
-      readonly>
-  </div>
+          <!-- USERNAME -->
+          <div>
+            <label class="font-semibold text-gray-700">Username</label>
+            <input 
+              type="text" 
+              required 
+              class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+          </div>
 
-  <!-- EMAIL -->
-  <div>
-    <label class="font-semibold text-gray-700">Email Address</label>
-    <input 
-      type="email"
-      value="maria@mail.com"
-      class="w-full border rounded-xl p-3 mt-1 bg-gray-200 text-gray-600 cursor-default"
-      readonly>
-  </div>
+          <!-- EMAIL -->
+          <div>
+            <label class="font-semibold text-gray-700">Email Address</label>
+            <input 
+              type="email" 
+              required 
+              class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+          </div>
 
-</form>
+          <!-- PASSWORD + CONFIRM PASSWORD -->
+          <div class="grid grid-cols-2 gap-4">
 
-<!-- SUBMIT BUTTON -->
-<a href="editSettingPersonal.html">
-  <button 
-    id="updateBtn"
-    class="w-full mt-6 py-3 bg-[#03045E] text-white font-bold rounded-xl hover:bg-[#07089C] shadow">
-    Update Information
-  </button>
-</a>
+            <!-- PASSWORD -->
+            <div>
+              <label class="font-semibold text-gray-700">Password</label>
+              <div class="relative">
+                <input 
+                  id="password"
+                  type="password"
+                  required  
+                  class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+                <i id="togglePassword"
+                   class="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+              </div>
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+            <div>
+              <label class="font-semibold text-gray-700">Confirm Password</label>
+              <div class="relative">
+                <input 
+                  id="confirmPassword"
+                  type="password"
+                  required 
+                  class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+                <i id="toggleConfirmPassword"
+                   class="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+
+        <!-- BUTTONS -->
+        <div class="flex gap-4 mt-6">
+            <button 
+            type="button"
+            onclick="submitForm()" 
+            class="w-1/2 py-2 bg-[#03045E] text-white text-center rounded-xl font-bold">
+            Save
+            </button>
+
+            <a href="settingPersonal.html"
+            class="w-1/2 py-2 bg-gray-300 text-gray-800 text-center rounded-xl font-bold">
+                Cancel
+            </a>
+        </div>
 
       </div>
 
@@ -180,6 +164,16 @@
   </div>
 
 <script>
+// SHOW/HIDE PASSWORD
+document.getElementById("togglePassword").onclick = () => {
+  const p = document.getElementById("password");
+  p.type = p.type === "password" ? "text" : "password";
+};
+
+document.getElementById("toggleConfirmPassword").onclick = () => {
+  const p = document.getElementById("confirmPassword");
+  p.type = p.type === "password" ? "text" : "password";
+};
 
 // MODAL PHOTO
 const openModal = document.getElementById("openModal");
@@ -206,19 +200,13 @@ deleteBtn.onclick = () => {
 };
 
 saveBtn.onclick = () => {
-  // Simpan foto ke localStorage sebagai Base64
-  fetch(preview.src)
-    .then(res => res.blob())
-    .then(blob => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        localStorage.setItem("profilePhoto", reader.result); // SIMPAN BASE64
-        mainProfileImg.src = reader.result; // UPDATE FOTO DI HALAMAN SAAT INI
-        modal.classList.add("hidden");
-      };
-      reader.readAsDataURL(blob);
-    });
+  mainProfileImg.src = preview.src;
+  modal.classList.add("hidden");
 };
+
+// UPDATE INFORMATION
+const form = document.getElementById("settingForm");
+const successAlert = document.getElementById("successAlert");
 
 </script>
 
@@ -245,40 +233,39 @@ saveBtn.onclick = () => {
   </script>
 
   <script>
-// LOAD DATA DARI LOCAL STORAGE JIKA ADA
-window.addEventListener("load", () => {
+function submitForm() {
 
-  // LOAD NAME, USERNAME, EMAIL
-  const fullName = localStorage.getItem("fullName");
-  const username = localStorage.getItem("username");
-  const email = localStorage.getItem("email");
+  const username = document.querySelector('input[type="text"]').value.trim();
+  const email = document.querySelector('input[type="email"]').value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-  // TAMPILKAN USERNAME DI PROFIL
-  if (username) {
-    document.getElementById("profileName").innerText = username;
-    document.querySelectorAll('#settingForm input')[0].value = username;
+  // VALIDASI
+  if (!username || !email || !password || !confirmPassword) {
+    alert("Please fill in all required fields.");
+    return;
   }
 
-  if (username) {
-    document.querySelectorAll('#settingForm input')[0].value = username;
+  if (password !== confirmPassword) {
+    alert("Password and Confirm Password must match!");
+    return;
   }
 
-  if (email) {        
-    document.querySelectorAll('#settingForm input')[1].value = email;
-  }
+  // SIMPAN
+  localStorage.setItem("username", username);
+  localStorage.setItem("email", email);
 
-  // LOAD PROFILE PHOTO (FIXED)
-  const savedPhoto = localStorage.getItem("profilePhoto");
-  if (savedPhoto) {
-    const mainPhoto = document.querySelector(".main-profile");
-    if (mainPhoto) mainPhoto.src = savedPhoto;
+  // SUCCESS POPUP
+  const successAlert = document.getElementById("successAlert");
+  successAlert.classList.remove("hidden");
 
-    const preview = document.getElementById("profilePreview");
-    if (preview) preview.src = savedPhoto;
-  }
-
-});
+  setTimeout(() => {
+    successAlert.classList.add("hidden");
+    window.location.href = "settingPersonal.html";
+  }, 1500);
+}
 </script>
+
 
 </body>
 </html>

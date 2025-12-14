@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background-color: #CFF1F9;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden">
+
+<!-- SIDEBAR -->
+<aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+    <div class="text-3xl font-bold mb-4 flex items-center gap-2">
+        <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+    </div>
+
+    <nav class="space-y-2">
+
+        <!-- HOME -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] hover:shadow"
+           href="dashboardGroup.html">
+            <img src="D:/Poolin/assets/homePage.png" class="w-8 h-8" />
+            <span>Home</span>
+        </a>
+
+        <!-- MY ROOMS (ACTIVE) -->
+        <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow">
+            <img src="D:/Poolin/assets/meeting.png" class="w-8 h-8" />
+            <span>My Rooms</span>
+        </div>
+
+        <!-- CONTRIBUTION -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] hover:shadow"
+           href="contributionGroup.html">
+            <img src="D:/Poolin/assets/donation.png" class="w-8 h-8" />
+            <span>Contribution</span>
+        </a>
+
+        <!-- SETTING -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] hover:shadow"
+           href="settingGroup.html">
+            <img src="D:/Poolin/assets/accountSetting.png" class="w-8 h-8" />
+            <span>Account Setting</span>
+        </a>
+
+    </nav>
+</aside>
+
+ <!-- ========== MAIN CONTENT ========== -->
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-10 overflow-y-auto">
+
+        <!-- TITLE -->
+        <h1 class="text-3xl font-bold text-[#022859]">Edit Room</h1>
+        <p class="text-[#476E9E] mb-8">Update your room details below</p>
+
+        <!-- ROOM DETAILS SECTION -->
+        <section class="bg-white shadow-md p-6 rounded-xl border border-[#BFDFFB]">
+
+            <h2 class="text-xl font-bold text-[#012A4A] mb-4">Room Details</h2>
+
+            <!-- ROOM NAME -->
+            <label class="block font-semibold text-[#013A63] mb-1">Room Name</label>
+            <input id="roomName"
+                   class="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-blue-400"
+                   type="text"
+                   placeholder="Office Lottery">
+
+            <!-- TARGET FIELDS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+               <!-- Target Amount -->
+                <div>
+                    <label class="block font-semibold text-[#013A63] mb-1">Target Amount</label>
+                    <input id="targetAmount"
+                        class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400"
+                        type="text"
+                        placeholder="Rp 5.000.000"
+                        oninput="formatRupiah(this)">
+                </div>
+
+                <!-- Target Date -->
+                <div>
+                    <label class="block font-semibold text-[#013A63] mb-1">Target Date</label>
+                    <div class="relative">
+                        <input id="targetDate"
+                               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400"
+                               type="date">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MEMBERS SECTION -->
+            <h2 class="text-xl font-bold text-[#012A4A] mt-8 mb-3">Members</h2>
+
+            <div id="memberList" class="space-y-3"></div>
+
+        </section>
+
+        <!-- BUTTON ACTIONS -->
+        <div class="flex justify-center gap-4 mt-8">
+            <button class="saveBtn bg-[#12248A] text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-[#0e1c6b]">
+                Save Change
+            </button>
+            <a href="myRoomsGroup.html"
+            class="bg-white px-6 py-2 rounded-lg border font-semibold hover:bg-gray-100 inline-block text-center rounded-lg font-semibold">
+                Cancel
+            </a>
+
+        </div>
+
+    </main>
+
+<script>
+function formatRupiah(input) {
+    let angka = input.value.replace(/[^0-9]/g, "");
+    if (!angka) {
+        input.value = "";
+        return;
+    }
+    input.value = "Rp " + angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+let roomIndex = -1;
+let rooms = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get("id");
+
+    rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+    roomIndex = rooms.findIndex(r => r.id == roomId);
+
+    if (roomIndex === -1) {
+        alert("Room not found");
+        return;
+    }
+
+    const data = rooms[roomIndex];
+
+    document.getElementById("roomName").value = data.name || "";
+    document.getElementById("targetAmount").value = data.target
+        ? "Rp " + data.target.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        : "";
+    document.getElementById("targetDate").value = data.targetDate || "";
+
+    data.members = data.members || [];
+    renderMembers(data.members);
+});
+
+function renderMembers(members) {
+    const list = document.getElementById("memberList");
+    list.innerHTML = "";
+
+    members.forEach((member, index) => {
+        const item = document.createElement("div");
+        item.className = "flex justify-between items-center bg-white border p-3 rounded-lg shadow-sm";
+
+        item.innerHTML = `
+            <span>${member.name || member}</span>
+            <button class="text-red-500 font-medium hover:text-red-700"
+                onclick="removeMember(${index})">
+                Remove
+            </button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function removeMember(index) {
+    rooms[roomIndex].members.splice(index, 1);
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+    renderMembers(rooms[roomIndex].members);
+}
+
+document.querySelector(".saveBtn").addEventListener("click", () => {
+
+    rooms[roomIndex].name = document.getElementById("roomName").value;
+    rooms[roomIndex].target = Number(
+        document.getElementById("targetAmount").value.replace(/[^0-9]/g, "")
+    );
+    rooms[roomIndex].targetDate = document.getElementById("targetDate").value;
+
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+
+    alert("Room updated successfully!");
+    window.location.href = "myRoomsGroup.html";
+});
+</script>
+
+
+</body>
+</html>

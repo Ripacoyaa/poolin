@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings - Poolin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="flex h-screen overflow-hidden bg-[#CFF1F9]">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+    <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+      <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity-90" />
+    </div>
+
+    <nav class="space-y-2">
+      <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" /> Home
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/meeting.png" class="w-8 opacity-90" /> My Rooms
+      </a>
+      <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/donation.png" class="w-8 opacity-90" /> Contribution
+      </a>
+      <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
+        <img src="D:/Poolin/assets/accountSetting.png" class="w-8 opacity-90" /> Account Setting
+      </div>
+    </nav>
+  </aside>
+
+  
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 p-5 overflow-y-auto">
+
+    <div class="max-w-full mx-auto flex flex-col gap-6">
+
+      <!-- FORM CARD -->
+      <div class="bg-white shadow-lg rounded-2xl border border-blue-100 p-6 w-full">
+
+        <h3 class="text-lg font-bold text-[#03045E] mb-4">
+          Change account information here
+        </h3>
+
+        <!-- FORM -->
+        <form id="settingForm" class="space-y-4">
+
+          <!-- USERNAME -->
+          <div>
+            <label class="font-semibold text-gray-700">Username</label>
+            <input 
+              type="text" 
+              required 
+              class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+          </div>
+
+          <!-- EMAIL -->
+          <div>
+            <label class="font-semibold text-gray-700">Email Address</label>
+            <input 
+              type="email" 
+              required 
+              class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+          </div>
+
+          <!-- PASSWORD + CONFIRM PASSWORD -->
+          <div class="grid grid-cols-2 gap-4">
+
+            <!-- PASSWORD -->
+            <div>
+              <label class="font-semibold text-gray-700">Password</label>
+              <div class="relative">
+                <input 
+                  id="password"
+                  type="password"
+                  required  
+                  class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+                <i id="togglePassword"
+                   class="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+              </div>
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+            <div>
+              <label class="font-semibold text-gray-700">Confirm Password</label>
+              <div class="relative">
+                <input 
+                  id="confirmPassword"
+                  type="password"
+                  required 
+                  class="w-full border rounded-xl p-3 mt-1 bg-[#F7FBFF] outline-none focus:ring-2 focus:ring-blue-300">
+                <i id="toggleConfirmPassword"
+                   class="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+
+        <!-- BUTTONS -->
+        <div class="flex gap-4 mt-6">
+            <button onclick="submitForm()" 
+            class="w-1/2 py-2 bg-[#03045E] text-white text-center rounded-xl font-bold">
+                Save
+            </button>
+
+            <a href="settingGroup.html"
+            class="w-1/2 py-2 bg-gray-300 text-gray-800 text-center rounded-xl font-bold">
+                Cancel
+            </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- POPUP MODAL PHOTO -->
+  <div id="photoModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white w-96 p-6 rounded-2xl shadow-xl relative">
+
+      <button id="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">
+        &times;
+      </button>
+
+      <h2 class="text-xl font-bold text-[#03045E] mb-4 text-center">Change Profile Photo</h2>
+
+      <div class="flex justify-center mb-4">
+        <img 
+          id="profilePreview"
+          src="D:/Poolin/assets/user.png" 
+          class="w-32 h-32 rounded-full object-cover shadow-md border">
+      </div>
+
+      <label class="block w-full bg-[#03045E] text-white py-2 rounded-xl text-center cursor-pointer hover:bg-[#0507A0] mb-3">
+        Upload New Photo
+        <input type="file" id="uploadPhoto" accept="image/*" class="hidden">
+      </label>
+
+      <button id="deletePhoto" class="w-full py-2 bg-red-500 text-white rounded-xl hover:bg-red-600">
+        Delete Photo
+      </button>
+
+      <div class="flex justify-center mt-4">
+          <button id="saveBtn" class="bg-blue-600 text-white px-4 py-2 rounded-xl">Save</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS POPUP -->
+  <div id="successAlert"
+    class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+      <div class="bg-white px-6 py-4 rounded-xl shadow-lg flex items-center gap-3 border border-green-500">
+        <i class="fa-solid fa-circle-check text-green-600 text-3xl"></i>
+        <span class="text-lg font-semibold text-green-700">Update Information Success!</span>
+      </div>
+  </div>
+
+<script>
+// SHOW/HIDE PASSWORD
+document.getElementById("togglePassword").onclick = () => {
+  const p = document.getElementById("password");
+  p.type = p.type === "password" ? "text" : "password";
+};
+
+document.getElementById("toggleConfirmPassword").onclick = () => {
+  const p = document.getElementById("confirmPassword");
+  p.type = p.type === "password" ? "text" : "password";
+};
+
+// MODAL PHOTO
+const openModal = document.getElementById("openModal");
+const closeModal = document.getElementById("closeModal");
+const modal = document.getElementById("photoModal");
+const uploadInput = document.getElementById("uploadPhoto");
+const preview = document.getElementById("profilePreview");
+const deleteBtn = document.getElementById("deletePhoto");
+const saveBtn = document.getElementById("saveBtn");
+const mainProfileImg = document.querySelector(".main-profile");
+
+openModal.onclick = () => modal.classList.remove("hidden");
+closeModal.onclick = () => modal.classList.add("hidden");
+
+modal.onclick = (e) => { if (e.target === modal) modal.classList.add("hidden"); };
+
+uploadInput.onchange = (event) => {
+  const file = event.target.files[0];
+  if (file) preview.src = URL.createObjectURL(file);
+};
+
+deleteBtn.onclick = () => {
+  preview.src = "D:/Poolin/assets/user.png";
+};
+
+saveBtn.onclick = () => {
+  mainProfileImg.src = preview.src;
+  modal.classList.add("hidden");
+};
+
+// UPDATE INFORMATION
+const form = document.getElementById("settingForm");
+const updateBtn = document.getElementById("updateBtn");
+const successAlert = document.getElementById("successAlert");
+
+updateBtn.onclick = () => {
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  // Show success popup
+  successAlert.classList.remove("hidden");
+
+  // Auto close
+  setTimeout(() => {
+    successAlert.classList.add("hidden");
+  }, 2500);
+};
+</script>
+
+<script>
+    const openLogoutModal = document.getElementById("openLogoutModal");
+    const logoutModal = document.getElementById("logoutModal");
+    const cancelLogout = document.getElementById("cancelLogout");
+    const confirmLogout = document.getElementById("confirmLogout");
+
+    // OPEN POPUP
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      document.getElementById("logoutPopup").classList.remove("hidden");
+    });
+
+    // CLOSE POPUP
+    document.getElementById("cancelLogout").addEventListener("click", () => {
+      document.getElementById("logoutPopup").classList.add("hidden");
+    });
+
+    // CONFIRM LOGOUT
+    document.getElementById("confirmLogout").addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
+
+  <script>
+function submitForm() {
+
+  const username = document.querySelectorAll('input[type="text"]')[1].value.trim();
+  const email = document.querySelector('input[type="email"]').value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  // CEK REQUIRED
+  if (!username || !email || !password || !confirmPassword) {
+      alert("Please fill in all required fields.");
+      return;
+  }
+
+  // CEK PASSWORD SAMA
+  if (password !== confirmPassword) {
+      alert("Password and Confirm Password must match!");
+      return;
+  }
+
+  // SIMPAN KE LOCAL STORAGE
+  localStorage.setItem("username", username);
+  localStorage.setItem("email", email);
+
+  // POPUP SUCCESS
+  const successAlert = document.getElementById("successAlert");
+  successAlert.classList.remove("hidden");
+
+  setTimeout(() => {
+      successAlert.classList.add("hidden");
+      window.location.href = "settingGroup.html";
+  }, 1500);
+}
+</script>
+
+</body>
+</html>

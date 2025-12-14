@@ -12,18 +12,18 @@
   <!-- SIDEBAR -->
   <aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
     <div class="text-3xl font-bold mb-0 flex items-center gap-2">
-      <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+      <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity-90" />
     </div>
 
     <nav class="space-y-2">
-      <a href="dashboardPersonal.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+      <a href="dashboardGroup.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
         <img src="D:/Poolin/assets/homePage.png" class="w-8 opacity-90" /> Home
       </a>
-      <a href="myGoalsActive.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
-        <img src="D:/Poolin/assets/savings.png" class="w-8 opacity-90" /> My Goals
+      <a href="myRoomsGroup.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/meeting.png" class="w-8 opacity-90" /> My Rooms
       </a>
-      <a href="reportPersonal.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
-        <img src="D:/Poolin/assets/report.png" class="w-8 opacity-90" /> Report
+      <a href="contributionGroup.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
+        <img src="D:/Poolin/assets/donation.png" class="w-8 opacity-90" /> Contribution
       </a>
       <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold shadow-lg">
         <img src="D:/Poolin/assets/accountSetting.png" class="w-8 opacity-90" /> Account Setting
@@ -31,7 +31,7 @@
     </nav>
   </aside>
 
- 
+   
   <!-- MAIN CONTENT -->
   <main class="flex-1 p-5 overflow-y-auto">
 
@@ -123,7 +123,7 @@
 </form>
 
 <!-- SUBMIT BUTTON -->
-<a href="editSettingPersonal.html">
+<a href="editSettingGroup.html">
   <button 
     id="updateBtn"
     class="w-full mt-6 py-3 bg-[#03045E] text-white font-bold rounded-xl hover:bg-[#07089C] shadow">
@@ -219,30 +219,7 @@ saveBtn.onclick = () => {
       reader.readAsDataURL(blob);
     });
 };
-
 </script>
-
-<script>
-    const openLogoutModal = document.getElementById("openLogoutModal");
-    const logoutModal = document.getElementById("logoutModal");
-    const cancelLogout = document.getElementById("cancelLogout");
-    const confirmLogout = document.getElementById("confirmLogout");
-
-    // OPEN POPUP
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      document.getElementById("logoutPopup").classList.remove("hidden");
-    });
-
-    // CLOSE POPUP
-    document.getElementById("cancelLogout").addEventListener("click", () => {
-      document.getElementById("logoutPopup").classList.add("hidden");
-    });
-
-    // CONFIRM LOGOUT
-    document.getElementById("confirmLogout").addEventListener("click", () => {
-      window.location.href = "index.html";
-    });
-  </script>
 
   <script>
 // LOAD DATA DARI LOCAL STORAGE JIKA ADA
@@ -278,7 +255,7 @@ window.addEventListener("load", () => {
   }
 
 });
-</script>
+</script>v
 
 </body>
 </html>

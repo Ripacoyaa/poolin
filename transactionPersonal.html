@@ -38,14 +38,14 @@
 
             <a href="setting.html"
                class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] transition">
-                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
-                Setting
+                <img src="D:/Poolin/assets/accountSetting.png" class="w-8 opacity-90" />
+                Account Setting
             </a>
         </nav>
     </aside>
 
     <!-- MAIN CONTENT -->
-    <main class="flex-1 p-4">
+    <main class="flex-1 p-4 overflow-y-auto">
 
         <!-- GOAL HEADER -->
         <div class="flex items-center gap-5 bg-[#E4F1FF] p-4 rounded-xl border border-blue-200 shadow mb-6">
@@ -58,41 +58,73 @@
         </div>
 
         <!-- TRANSACTION BOX (FULL WIDTH + LOWER HEIGHT) -->
-        <div class="bg-white p-6 rounded-2xl shadow-xl border border-blue-200 w-full">
+        <div class="bg-white p-6 rounded-2xl shadow-xl border w-full">
 
-            <h2 class="text-2xl font-bold text-[#03045E] mb-4">Transaction</h2>
+            <!-- TITLE + SAVING + SEPARATOR -->
+            <div class="flex items-center gap-3 mb-4">
+                <h2 class="text-2xl font-bold text-[#03045E]">Transaction</h2>
+
+                <!-- GARIS PEMISAH VERTICAL -->
+                <div class="h-6 w-[2px] bg-[#03045E] opacity-40"></div>
+
+                <h2 id="transactionType" class="text-xl font-semibold text-[#03045E]">Saving</h2>
+            </div>
 
             <!-- TABS -->
             <div class="flex mb-5 h-10">
                 <button id="btnSaving"
-                    class="flex-1 bg-blue-100 text-[#03045E] font-semibold rounded-l-xl">
+                    class="flex-1 font-semibold rounded-l-xl bg-[#03045E] text-white"
+                    onclick="setActiveTab('saving')">
                     Saving
                 </button>
 
                 <button id="btnWithdraw"
-                    class="flex-1 bg-[#03045E] text-white font-semibold rounded-r-xl">
+                    class="flex-1 font-semibold rounded-r-xl bg-blue-100 text-[#03045E]"
+                    onclick="setActiveTab('withdraw')">
                     Withdraw
                 </button>
             </div>
 
             <!-- FORM -->
-            <div>
-                <label class="font-semibold text-gray-700">Date</label>
-                <input type="date" class="w-full border rounded-lg p-2 mt-1 mb-3">
+            <div class="space-y-4">
 
-                <label class="font-semibold text-gray-700">Amount (Rp)</label>
-                <input type="number" class="w-full border rounded-lg p-2 mt-1 mb-3">
+                <!-- DATE -->
+                <div>
+                    <label class="font-semibold text-gray-700">Date</label>
+                    <input id="dateInput" type="date"
+                        class="w-full border rounded-lg p-2 mt-1"
+                        readonly>
+                </div>
 
-                <label class="font-semibold text-gray-700">Note</label>
-                <textarea class="w-full border rounded-lg p-2 mt-1 h-10 mb-3"></textarea>
+                <!-- AMOUNT -->
+                <div>
+                    <label class="font-semibold text-gray-700">Amount (Rp)</label>
+                    <input type="number"
+                        class="w-full border rounded-lg p-2 mt-1">
+                </div>
+
+                <!-- PHOTO -->
+                <div>
+                    <label class="font-semibold text-gray-700">Upload Photo</label>
+                    <input type="file"
+                        accept="image/*"
+                        required
+                        class="w-full p-2 border rounded-lg bg-gray-50 mt-1">
+                </div>
+
+                <!-- NOTE -->
+                <div>
+                    <label class="font-semibold text-gray-700">Note</label>
+                    <textarea class="w-full border rounded-lg p-2 mt-1 h-20"></textarea>
+                </div>
+
             </div>
 
-            <!-- BUTTONS -->
             <div class="flex gap-4 mt-4">
-                <button
-                    class="w-1/2 py-2 bg-[#03045E] text-white rounded-xl font-bold hover:bg-[#050691]">
-                    Save
-                </button>
+            <a href="myGoalsActive.html" 
+                    class="w-1/2 py-2 bg-[#03045E] text-white text-center rounded-xl font-bold hover:bg-[#050691]">
+                        Save
+                </a>
 
                 <a href="myGoalsActive.html"
                     class="w-1/2 py-2 bg-gray-300 text-gray-800 text-center rounded-xl font-bold hover:bg-gray-400">
@@ -104,27 +136,43 @@
 
     </main>
 
-    <script>
-        // Tab interaction
-        const btnSaving = document.getElementById("btnSaving");
-        const btnWithdraw = document.getElementById("btnWithdraw");
+        <script>
+        function setActiveTab(tab) {
+            const btnSaving = document.getElementById("btnSaving");
+            const btnWithdraw = document.getElementById("btnWithdraw");
+            const transactionType = document.getElementById("transactionType");
 
-        btnSaving.addEventListener("click", () => {
-            btnSaving.classList.add("bg-blue-100", "text-[#03045E]");
-            btnWithdraw.classList.add("text-white", "bg-[#03045E]");
+            if (tab === "saving") {
+                // Update button style
+                btnSaving.classList.add("bg-[#03045E]", "text-white");
+                btnSaving.classList.remove("bg-blue-100", "text-[#03045E]");
 
-            btnSaving.classList.remove("bg-[#03045E]", "text-white");
-            btnWithdraw.classList.remove("bg-blue-100", "text-[#03045E]");
-        });
+                btnWithdraw.classList.add("bg-blue-100", "text-[#03045E]");
+                btnWithdraw.classList.remove("bg-[#03045E]", "text-white");
 
-        btnWithdraw.addEventListener("click", () => {
-            btnWithdraw.classList.add("bg-blue-100", "text-[#03045E]");
-            btnSaving.classList.add("text-white", "bg-[#03045E]");
+                // Update title beside "Transaction"
+                transactionType.textContent = "Saving";
 
-            btnWithdraw.classList.remove("bg-[#03045E]", "text-white");
-            btnSaving.classList.remove("bg-blue-100", "text-[#03045E]");
-        });
-    </script>
+            } else {
+                // Update button style
+                btnWithdraw.classList.add("bg-[#03045E]", "text-white");
+                btnWithdraw.classList.remove("bg-blue-100", "text-[#03045E]");
+
+                btnSaving.classList.add("bg-blue-100", "text-[#03045E]");
+                btnSaving.classList.remove("bg-[#03045E]", "text-white");
+
+                // Update title beside "Transaction"
+                transactionType.textContent = "Withdraw";
+            }
+        }
+        </script>
+
+        <script>
+            // Set today's date automatically
+            const today = new Date().toISOString().split("T")[0];
+            document.getElementById("dateInput").value = today;
+        </script>
+        
 
 </body>
 </html>

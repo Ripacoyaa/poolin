@@ -39,8 +39,8 @@
 
             <a href="settingPersonal.html"
             class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold hover:bg-[#023E8A] hover:shadow-lg transition">
-                <img src="D:/Poolin/assets/setting.png" class="w-8 opacity-90" />
-                Setting
+                <img src="D:/Poolin/assets/accountSetting.png" class="w-8 opacity-90" />
+                Account Setting
             </a>
         </nav>
     </aside>
@@ -58,16 +58,22 @@
                 </div>
             </div>
 
-            <!-- Personal/Group Switch -->
-            <div id="toggleSwitch" class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
-                <button id="btnPersonal"
-                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white text-sm font-semibold">
+            <!-- PERSONAL/GROUP SWITCHER -->
+            <div class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
+                
+                <!-- PERSONAL BUTTON -->
+                <button  
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white font-semibold text-sm">  
                     Personal
                 </button>
-                <button id="btnGroup"
-                    class="px-4 py-1.5 rounded-full text-[#03045E] text-sm font-semibold">
+
+                <!-- GROUP BUTTON (ACTIVE) -->
+                <button 
+                    onclick="window.location.href='dashboardGroup.html'" 
+                    class="px-4 py-1.5 rounded-full text-[#03045E] font-semibold text-sm hover:bg-blue-100">
                     Group
                 </button>
+
             </div>
         </div>
 
@@ -201,11 +207,8 @@
         </div>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-    const goalFilter = document.getElementById("goalFilter"); // dropdown All Goals
+    const goalFilter = document.getElementById("goalFilter");
 
     function getTransactions() {
         return JSON.parse(localStorage.getItem("transactions") || "[]");
@@ -217,55 +220,103 @@
         const transactions = getTransactions();
         const selectedGoal = goalFilter.value;
 
-        let labels = [];
-        let amounts = [];
+        const weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"];
 
-        if (selectedGoal === "All") {
+        // Struktur data saldo per minggu
+        const weeklyBalance = {};
 
-            // Group by goal
-            const grouped = {};
+        transactions.forEach(t => {
+            const date = new Date(t.date);
+            const week = Math.ceil(date.getDate() / 7);
+            const goal = t.goal;
 
-            transactions.forEach(t => {
-                if (!grouped[t.goal]) grouped[t.goal] = 0;
-                grouped[t.goal] += t.amount;
-            });
+            if (!weeklyBalance[goal]) {
+                weeklyBalance[goal] = [0, 0, 0, 0]; // saldo mingguan
+            }
 
-            labels = Object.keys(grouped);
-            amounts = Object.values(grouped);
+            // Tambah atau minus berdasarkan transaksi
+            let nominal = t.amount;
 
-        } else {
+            if (t.transaction?.toLowerCase().includes("ambil") ||
+                t.transaction?.toLowerCase().includes("withdraw") ||
+                t.transaction?.toLowerCase().includes("expenditure")) 
+            {
+                nominal = -nominal; // withdraw = nilai negatif
+            }
 
-            // Filter by selected goal → show date-based chart
-            const filtered = transactions.filter(t => t.goal === selectedGoal);
+            weeklyBalance[goal][week - 1] += nominal;
+        });
 
-            labels = filtered.map(t => t.date);
-            amounts = filtered.map(t => t.amount);
+        // Ubah ke bentuk akumulatif (saldo naik turun)
+        for (const goal in weeklyBalance) {
+            for (let i = 1; i < 4; i++) {
+                weeklyBalance[goal][i] += weeklyBalance[goal][i - 1];
+            }
         }
 
-        // Render Chart
         if (chart) chart.destroy();
 
+        // ====================== 1 GOAL ============================
+        if (selectedGoal !== "All") {
+            const dataValues = weeklyBalance[selectedGoal] || [0, 0, 0, 0];
+
+            chart = new Chart(document.getElementById("savingChart"), {
+                type: "line",
+                data: {
+                    labels: weekLabels,
+                    datasets: [{
+                        label: selectedGoal,
+                        data: dataValues,
+                        borderWidth: 3,
+                        tension: 0.3,
+                        borderColor: "#ffffff",
+                        pointBackgroundColor: "#ffffff"
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { labels: { color: "white" } }
+                    },
+                    scales: {
+                        x: { ticks: { color: "white" }, offset: true },
+                        y: { ticks: { color: "white" }, beginAtZero: true }
+                    }
+                }
+            });
+
+            return;
+        }
+
+        // ====================== ALL GOALS ============================
+        const colors = ["#4DA3FF", "#8EC5FF", "#FFFFFF"];
+
+        const datasets = Object.keys(weeklyBalance).map((goal, index) => ({
+            label: goal,
+            data: weeklyBalance[goal],
+            borderWidth: 3,
+            tension: 0.3,
+            borderColor: colors[index % colors.length],
+            pointBackgroundColor: colors[index % colors.length]
+        }));
+
         chart = new Chart(document.getElementById("savingChart"), {
-            type: "bar",
+            type: "line",
             data: {
-                labels: labels,
-                datasets: [{
-                    data: amounts,
-                    backgroundColor: "rgba(255,255,255,0.9)",
-                    borderRadius: 6
-                }]
+                labels: weekLabels,
+                datasets: datasets
             },
             options: {
-                plugins: { legend: { display: false }},
+                plugins: {
+                    legend: { labels: { color: "white" } }
+                },
                 scales: {
-                    x: { ticks: { color: "white" }},
-                    y: { ticks: { color: "white" }}
+                    x: { ticks: { color: "white" }, offset: true },
+                    y: { ticks: { color: "white" }, beginAtZero: true }
                 }
             }
         });
     }
 
-    // Init
     document.addEventListener("DOMContentLoaded", updateChart);
     goalFilter.addEventListener("change", updateChart);
 </script>

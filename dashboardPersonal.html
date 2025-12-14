@@ -48,8 +48,8 @@
         <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
                   hover:bg-[#023E8A] 
                   hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]" href="settingPersonal.html">
-            <img src="D:/Poolin/assets/setting.png" class="w-8 h-8 opacity90" />
-            <span>Setting</span>
+            <img src="D:/Poolin/assets/accountSetting.png" class="w-8 h-8 opacity90" />
+            <span>Account Setting</span>
         </a>
 
     </nav>
@@ -61,24 +61,34 @@
         <!-- HEADER -->
         <div class="flex justify-between items-center mb-4">
             
-            <!-- HOME + HI SELLA -->
+            <!-- HOME -->
             <div>
-                <h1 class="text-2xl font-bold text-blue-900 flex items-center gap-2">
-                    <img src="D:/Poolin/assets/home.png" class="w-10 h-10 opacity90" />
-                    <span>Home</span>
-                </h1>
-
-                <p class="text-blue-800 ml-12 font-semibold -mt-1">Hi Sella!</p>
+                <div class="flex items-center gap-2">
+                    <img src="D:/Poolin/assets/homeGroup.png" class="w-14 h-14 opacity-90" />
+                    <div>
+                        <h1 class="text-2xl font-bold text-blue-900 leading-tight">
+                            Home
+                        </h1>
+                        <p class="text-blue-800 font-semibold text-sm">
+                            Personal Mode
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- PERSONAL/GROUP SWITCHER -->
             <div class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
-
-                <button class="px-4 py-1.5 rounded-full bg-[#03045E] text-white font-semibold text-sm">
+                
+                <!-- PERSONAL BUTTON -->
+                <button  
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white font-semibold text-sm">  
                     Personal
                 </button>
 
-                <button class="px-4 py-1.5 rounded-full text-[#03045E] font-semibold text-sm">
+                <!-- GROUP BUTTON (ACTIVE) -->
+                <button 
+                    onclick="window.location.href='dashboardGroup.html'" 
+                    class="px-4 py-1.5 rounded-full text-[#03045E] font-semibold text-sm hover:bg-blue-100">
                     Group
                 </button>
 

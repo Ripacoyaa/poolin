@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poolin Registration</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        dark: '#03045E',
+        mid: '#023E8A',
+        light: '#CFF1F9',
+        g1: '#050691',
+        g2: '#0608C4',
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body class="min-h-screen flex font-sans">
+
+<!-- LEFT PANEL -->
+<div class="w-1/2 bg-gradient-to-b from-g1 to-g2
+            text-white p-16 flex flex-col justify-between">
+
+  <div>
+    <p class="text-sm opacity-80 mb-6">
+      Smart money starts here
+    </p>
+    <h1 class="text-3xl font-bold leading-snug">
+      Dream big, save smart,<br>
+      and vibe with your goals<br>
+      Join Poolin and start<br>
+      your money journey today!
+    </h1>
+  </div>
+
+  <div class="flex justify-center">
+    <img src="D:/Poolin/assets/loginPage.png" class="w-60">
+  </div>
+
+  <p class="text-sm opacity-80 italic">
+    Every big goal starts with a single coin.
+  </p>
+
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="w-1/2 bg-light flex items-center justify-center">
+
+  <div class="w-[420px] p-8">
+
+    <!-- LOGO -->
+    <div class="flex items-center mb-8">
+      <img src="D:/Poolin/assets/logoPoolinGelap.png"
+           class="w-52 h-auto">
+    </div>
+
+    <!-- FORM -->
+    <form id="registerForm" class="space-y-6">
+
+      <!-- USERNAME -->
+      <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+        <img src="D:/Poolin/assets/user.png" class="w-5 h-5 opacity-70">
+        <input id="username" required
+          placeholder="Username"
+          class="flex-1 bg-transparent outline-none">
+      </div>
+
+      <!-- EMAIL -->
+      <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+        <img src="D:/Poolin/assets/gmail.png" class="w-5 h-5 opacity-70">
+        <input id="email" type="email" required
+          placeholder="Email"
+          class="flex-1 bg-transparent outline-none">
+      </div>
+
+      <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+        <img src="D:/Poolin/assets/padlock.png"
+            class="w-5 h-5 opacity-70">
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
+            class="flex-1 bg-transparent outline-none">
+
+        <button type="button"
+                onclick="togglePassword('password', this)">
+            <img src="D:/Poolin/assets/hidden.png"
+                class="w-5 h-5 opacity-80">
+        </button>
+        </div>
+
+        <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+        <img src="D:/Poolin/assets/padlock1.png"
+            class="w-5 h-5 opacity-70">
+
+        <input
+            id="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+            required
+            class="flex-1 bg-transparent outline-none">
+
+        <button type="button"
+                onclick="togglePassword('confirmPassword', this)">
+            <img src="D:/Poolin/assets/hidden.png"
+                class="w-5 h-5 opacity-80">
+        </button>
+        </div>
+
+      <!-- ERROR MESSAGE -->
+     <p id="errorMsg" class="text-red-600 text-sm hidden">
+        Password and Confirm Password do not match
+        </p>
+
+
+      <!-- AGREEMENT -->
+      <label class="flex items-center gap-2 text-sm text-dark">
+        <input id="agree" type="checkbox" required class="accent-dark">
+        I agree with privacy and policy
+      </label>
+
+      <!-- REGISTER BUTTON -->
+     <button
+        type="button"
+        onclick="window.location.href='choisePage.html'"
+        class="w-full bg-gradient-to-b from-g1 to-g2
+            text-white py-3 rounded-full font-semibold
+            hover:opacity-90 transition">
+        Registrasi
+    </button>
+
+      <p class="text-center text-sm text-dark">
+        Already have an account?
+        <a href="loginPage.html" class="font-semibold underline">
+          Login
+        </a>
+      </p>
+
+    </form>
+  </div>
+</div>
+
+<script>
+function togglePassword(id, btn) {
+  const input = document.getElementById(id);
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const pass = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
+  const error = document.getElementById("errorMsg");
+
+  if (pass !== confirm) {
+    error.classList.remove("hidden");
+    return;
+  }
+
+  error.classList.add("hidden");
+
+  // redirect ke halaman pilihan
+  window.location.href = "choicePage.html";
+});
+</script>
+
+<script>
+function togglePassword(id, btn) {
+  const input = document.getElementById(id);
+  const icon = btn.querySelector("img");
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.src = "D:/Poolin/assets/eye.png";      // open eye
+  } else {
+    input.type = "password";
+    icon.src = "D:/Poolin/assets/hidden.png";   // closed eye (lashes)
+  }
+}
+
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const pass = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
+  const error = document.getElementById("errorMsg");
+
+  if (pass !== confirm) {
+    error.classList.remove("hidden");
+    return;
+  }
+
+  error.classList.add("hidden");
+
+  // redirect ke halaman pilihan
+  window.location.href = "choicePage.html";
+});
+</script>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
+  const error = document.getElementById("errorMsg");
+
+  if (password !== confirm) {
+    error.classList.remove("hidden");
+    return;
+  }
+
+  error.classList.add("hidden");
+
+  // SIMPAN KE LOCALSTORAGE
+  localStorage.setItem("poolinUser", JSON.stringify({
+    username: username,
+    password: password
+  }));
+
+  // redirect ke halaman pilihan
+  window.location.href = "choicePage.html";
+});
+</script>
+
+</body>
+</html>

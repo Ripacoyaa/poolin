@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poolin Login</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        dark: '#03045E',
+        mid: '#023E8A',
+        light: '#CFF1F9',
+        g1: '#050691',
+        g2: '#0608C4',
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body class="min-h-screen flex font-sans">
+
+<!-- LEFT PANEL -->
+<div class="w-1/2 bg-gradient-to-b from-g1 to-g2
+            text-white p-16 flex flex-col justify-between">
+
+  <div>
+    <p class="text-sm opacity-80 mb-6">
+      Track your cash, grow your stash
+    </p>
+    <h1 class="text-3xl font-bold leading-snug">
+      Let’s make saving a <br>
+      whole vibe 💸 <br>
+      Welcome back, <br>
+      smart spender 👋
+    </h1>
+  </div>
+
+  <div class="flex justify-center">
+    <img src="D:/Poolin/assets/loginPage.png" class="w-60">
+  </div>
+
+  <p class="text-sm opacity-80">
+    Keep building your goals, one coin at a time.
+  </p>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="w-1/2 bg-light flex items-center justify-center">
+
+  <div class="w-[420px] p-8">
+
+    <!-- LOGO -->
+    <div class="flex items-center mb-6">
+      <img src="D:/Poolin/assets/logoPoolinGelap.png"
+           class="w-52 h-auto">
+    </div>
+
+    <!-- FORM LOGIN -->
+    <form id="loginForm" class="space-y-6">
+
+  <!-- USERNAME -->
+  <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+    <img src="D:/Poolin/assets/user.png" class="w-5 h-5 opacity-70">
+    <input id="username" required
+      placeholder="Username"
+      class="flex-1 bg-transparent outline-none">
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="flex items-center gap-3 border-b-2 border-dark py-2">
+    <img src="D:/Poolin/assets/padlock.png" class="w-5 h-5 opacity-70">
+
+    <input id="password" type="password" required
+      placeholder="Password"
+      class="flex-1 bg-transparent outline-none">
+
+    <button type="button" onclick="togglePassword('password', this)">
+      <img src="D:/Poolin/assets/hidden.png"
+           class="w-5 h-5 opacity-80">
+    </button>
+  </div>
+
+<!-- ERROR MESSAGE -->
+  <p id="loginError" class="text-red-600 text-sm hidden">
+    Invalid username or password
+  </p>
+
+      <div class="flex justify-between text-sm text-dark">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="accent-dark">
+          Remember me
+        </label>
+        <a href="#" class="hover:underline">
+          Forgot password?
+        </a>
+      </div>
+
+       <!-- LOGIN BUTTON -->
+  <button type="submit"
+    class="w-full bg-gradient-to-b from-g1 to-g2
+           text-white py-3 rounded-full font-semibold">
+    Login
+  </button>
+
+
+      <p class="text-center text-sm text-dark">
+        Don’t have an account?
+        <a href="registPage.html" class="font-semibold underline">
+          Create Account
+        </a>
+      </p>
+
+    </form>
+  </div>
+</div>
+
+<script>
+function togglePassword(id, btn) {
+  const input = document.getElementById(id);
+  const icon = btn.querySelector("img");
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.src = "D:/Poolin/assets/eye.png";
+  } else {
+    input.type = "password";
+    icon.src = "D:/Poolin/assets/hidden.png";
+  }
+}
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const inputUser = document.getElementById("username").value;
+  const inputPass = document.getElementById("password").value;
+  const error = document.getElementById("loginError");
+
+  const savedUser = JSON.parse(localStorage.getItem("poolinUser"));
+
+  if (!savedUser ||
+      inputUser !== savedUser.username ||
+      inputPass !== savedUser.password) {
+
+    error.classList.remove("hidden");
+    return;
+  }
+
+  error.classList.add("hidden");
+
+  // login berhasil
+  window.location.href = "choicePage.html";
+});
+</script>
+
+</body>
+</html>

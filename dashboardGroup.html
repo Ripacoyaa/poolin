@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poolin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background-color: #CFF1F9;
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden">
+
+    <!-- SIDEBAR -->
+<aside class="w-64 bg-gradient-to-b from-[#050691] to-[#0608C4] text-white p-6 flex flex-col">
+    <div class="text-3xl font-bold mb-0 flex items-center gap-2">
+        <img src="D:/Poolin/assets/logoPoolin.png" class="w-30 opacity90" />
+    </div>
+
+    <nav class="space-y-2">
+
+        <!-- ACTIVE HOME -->
+        <div class="flex items-center gap-3 bg-[#023E8A] px-4 py-3 rounded-xl font-bold 
+                    shadow-[0_4px_12px_rgba(0,0,0,0.25)]">
+            <img src="D:/Poolin/assets/homePage.png" class="w-8 h-8 opacity90" />
+            <span>Home</span>
+        </div>
+
+        <!-- MENU HOVER VERSION -->
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] 
+                  hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]" href="myRoomsGroup.html">
+            <img src="D:/Poolin/assets/meeting.png" class="w-8 h-8 opacity90" />
+            <span>My Rooms</span>
+        </a>
+
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] 
+                  hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]" href="contributionGroup.html">
+            <img src="D:/Poolin/assets/donation.png" class="w-8 h-8 opacity90" />
+            <span>Contribution</span>
+        </a>
+
+        <a class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition 
+                  hover:bg-[#023E8A] 
+                  hover:shadow-[0_6px_18px_rgba(0,0,0,0.35)]" href="settingGroup.html">
+            <img src="D:/Poolin/assets/accountSetting.png" class="w-8 h-8 opacity90" />
+            <span>Account Setting</span>
+        </a>
+
+    </nav>
+</aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8 overflow-y-auto">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-4">
+            
+            <!-- HOME -->
+            <div>
+                <div class="flex items-center gap-2">
+                    <img src="D:/Poolin/assets/homeGroup.png" class="w-14 h-14 opacity-90" />
+                    <div>
+                        <h1 class="text-2xl font-bold text-blue-900 leading-tight">
+                            Home
+                        </h1>
+                        <p class="text-blue-800 font-semibold text-sm">
+                            Group Mode
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONAL/GROUP SWITCHER -->
+            <div class="flex items-center bg-white rounded-full p-1 shadow-md border border-[#03045E]">
+                
+                <!-- PERSONAL BUTTON -->
+                <button 
+                    onclick="window.location.href='dashboardPersonal.html'" 
+                    class="px-4 py-1.5 rounded-full text-[#03045E] font-semibold text-sm hover:bg-blue-100">
+                    Personal
+                </button>
+
+                <!-- GROUP BUTTON (ACTIVE) -->
+                <button 
+                    class="px-4 py-1.5 rounded-full bg-[#03045E] text-white font-semibold text-sm">
+                    Group
+                </button>
+
+            </div>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+
+            <!-- TOTAL ROOMS -->
+            <div class="bg-gradient-to-b from-[#050691] to-[#0608C4] text-white rounded-xl p-5 flex items-center gap-4 shadow-xl">
+                <div class="w-14 h-14 rounded-lg flex items-center justify-center">
+                    <img src="D:/Poolin/assets/networking.png" class="w-14 opacity-90">
+                </div>
+                <div>
+                    <p class="text-30 opacity-80">Total Rooms</p>
+                    <p class="text-3xl font-bold leading-tight">5</p>
+                </div>
+            </div>
+
+            <!-- ACTIVE ROOMS -->
+            <div class="bg-gradient-to-b from-[#050691] to-[#0608C4] text-white rounded-xl p-5 flex items-center gap-4 shadow-xl">
+                <div class="w-14 h-14 rounded-lg flex items-center justify-center">
+                    <img src="D:/Poolin/assets/time-management.png" class="w-14 opacity-90">
+                </div>
+                <div>
+                    <p class="text-30 opacity-80">Active Rooms</p>
+                    <p class="text-3xl font-bold leading-tight">3</p>
+                </div>
+            </div>
+
+            <!-- CONTRIBUTION -->
+            <div class="bg-gradient-to-b from-[#050691] to-[#0608C4] text-white rounded-xl p-5 flex items-center gap-4 shadow">
+                <div class="w-14 h-14 rounded-lg flex items-center justify-center">
+                    <img src="D:/Poolin/assets/donation.png" class="w-14 opacity-90">
+                </div>
+                <div>
+                    <p class="text-30 opacity-80">Contribution</p>
+                    <p class="text-3xl font-bold leading-tight">Rp 2.500.000</p>
+                    <p class="text-xs opacity-70">This Month</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="rounded-xl p-4 mb-0">
+            <h3 class="font-bold text-lg text-[#03045E] mb-3">Quick Actions</h3>
+
+            <div class="flex gap-4">
+
+                <!-- Deposit Button -->
+                <button 
+                    onclick="openJoinRoom()"
+                    class="flex items-center gap-2 px-4 py-2 bg-[#CFF1F9] rounded-lg 
+                        border-2 border-[#023E8A] text-[#023E8A] font-semibold 
+                        shadow-md hover:bg-[#b8e7f7] transition">
+
+                    <img src="D:/Poolin/assets/arrow.png" class="w-6 h-6 opacity-90">
+                    <span>Join room</span>
+                </button>
+
+                <!-- Create Room Button -->
+                <button 
+                    onclick="openCreateRoom()"
+                    class="flex items-center gap-2 px-4 py-2 bg-[#CFF1F9] rounded-lg 
+                        border-2 border-[#023E8A] text-[#023E8A] font-semibold 
+                        shadow-md hover:bg-[#b8e7f7] transition">
+
+                    <img src="D:/Poolin/assets/add.png" class="w-6 h-6 opacity-90">
+                    <span>Create a new room</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- JOIN ROOM MODAL -->
+            <div id="joinRoomModal" 
+                 class="fixed inset-0 bg-black/40 hidden z-50 flex justify-center items-center">
+                
+                <div class="bg-white w-96 p-6 rounded-2xl items-center shadow-xl">
+                    <h2 class="text-xl font-bold mb-3 text-blue-900">Join a Room</h2>
+
+                    <label class="text-sm text-gray-600">Enter Room Code</label>
+                    <input id="joinCode" type="text" 
+                        class="w-full mt-1 p-2 border rounded-lg bg-gray-100 focus:bg-white outline-none">
+
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button onclick="closeJoinRoom()" 
+                                class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+                            Cancel
+                        </button>
+
+                        <button onclick="submitJoinRoom()" 
+                                class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                            Join
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CREATE ROOM MODAL -->
+            <div id="createRoomModal" 
+        class="fixed inset-0 bg-black/40 hidden z-50 flex justify-center items-center">
+                
+                <div class="bg-white w-[420px] p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-xl font-bold mb-3 text-blue-900">Create a New Room</h2>
+
+                    <!-- Room Name -->
+                    <label class="text-sm text-gray-600">Group Name</label>
+                    <input id="roomName" type="text" 
+                        class="w-full mt-1 p-2 border rounded-lg bg-gray-100 focus:bg-white outline-none mb-3">
+
+                    <!-- Target Amount -->
+                    <label class="text-sm text-gray-600">Target Amount</label>
+                    <input id="targetAmount" type="number" 
+                        class="w-full mt-1 p-2 border rounded-lg bg-gray-100 focus:bg-white outline-none mb-3">
+
+                    <!-- Target Date -->
+                    <label class="text-sm text-gray-600">Target Date</label>
+                    <input id="targetDate" type="date" 
+                        class="w-full mt-1 p-2 border rounded-lg bg-gray-100 focus:bg-white outline-none mb-3">
+
+                    <!-- Created Date (auto) -->
+                    <label class="text-sm text-gray-600">Created Date</label>
+                    <input id="createdDate" type="text" disabled
+                        class="w-full mt-1 p-2 border rounded-lg bg-gray-200 outline-none mb-3">
+
+                    <div class="flex justify-end gap-3 mt-4">
+                        <button onclick="closeCreateRoom()" 
+                                class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+                            Cancel
+                        </button>
+
+                        <button onclick="submitCreateRoom()" 
+                                class="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700">
+                            Create
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+<!-- Popup Success Create Room -->
+<div id="successPopup" class="fixed inset-0 bg-black/40 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-2xl p-8 w-[420px] text-center shadow-xl">
+
+      <h2 class="text-2xl font-semibold text-[#0D3B66]">
+          Room successfully created
+      </h2>
+
+      <p class="text-gray-500 mt-2">
+          Share this code with your friends so they can join
+      </p>
+
+      <!-- Code Box -->
+      <div class="mt-5">
+          <input 
+              id="generatedCode" 
+              type="text" 
+              class="w-full text-center text-2xl font-bold border rounded-xl py-3 bg-gray-100"
+              readonly
+          />
+      </div>
+
+      <!-- Copy Button -->
+      <button 
+          onclick="copyRoomCode()"
+          class="mt-3 w-full py-2 rounded-xl bg-gray-200 hover:bg-gray-300 text-sm font-medium">
+          Copy Code
+      </button>
+
+      <!-- Ennter -->
+      <button
+            onclick="window.location.href='dashboardGroup.html'"
+            class="mt-5 w-full py-3 bg-[#0D3B66] hover:bg-[#0b3054] text-white rounded-xl font-semibold">
+            Enter the room
+        </button>
+
+
+  </div>
+</div>
+
+        <!-- YOUR ROOMS -->
+            <div class="bg-[#D5EDFF] rounded-xl p-4 mb-6">
+                <h3 class="font-bold text-lg text-[#03045E] mb-3">Your Rooms</h3>
+
+                <div class="space-y-4"></div>
+            </div>
+
+            </div>
+        </div>
+
+        <!-- WRAPPER UNTUK MENYATUKAN TOP CONTRIBUTOR & RECENT ACTIVITY -->
+<div class="flex gap-6 w-full">
+
+    <!-- TOP CONTRIBUTOR (KIRI) -->
+    <div class="bg-[#C5E5F9] rounded-xl p-4 mb-6 w-1/2">
+        <h3 class="font-semibold text-lg text-[#03045E] mb-4">Top Contributor of the Month</h3>
+
+        <div class="space-y-3">
+
+            <!-- 1 -->
+            <div class="bg-white rounded-xl p-3 shadow flex items-center gap-3">
+                <img src="D:/Poolin/assets/award.png" class="w-12 opacity-90">
+                <div>
+                    <p class="font-semibold text-[#03045E]">Andi Wijaya</p>
+                    <p class="text-sm text-gray-500">Rp3.000.000</p>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="bg-white rounded-xl p-3 shadow flex items-center gap-3">
+                <img src="D:/Poolin/assets/silver-medal.png" class="w-12 opacity-90">
+                <div>
+                    <p class="font-semibold text-[#03045E]">Siti Nurhaliza</p>
+                    <p class="text-sm text-gray-500">Rp2.200.000</p>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="bg-white rounded-xl p-3 shadow flex items-center gap-3">
+                <img src="D:/Poolin/assets/bronze.png" class="w-12 opacity-90">
+                <div>
+                    <p class="font-semibold text-[#03045E]">Budi Santoso</p>
+                    <p class="text-sm text-gray-500">Rp1.800.000</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+            <!-- RECENT ACTIVITY (KANAN) -->
+            <div class="bg-[#D5EDFF] rounded-xl p-4 mt-0 w-1/2">
+                <h3 class="font-semibold text-lg text-[#03045E] mb-4">Recent Activity</h3>
+
+                <div class="space-y-3">
+                    <div class="bg-white p-3 rounded-xl shadow flex justify-between">
+                        <p>Andi deposited (Office Lottery)</p>
+                        <p class="font-semibold text-[#03045E]">Rp300.000</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-xl shadow flex justify-between">
+                        <p>Siti deposited (Family Vacation)</p>
+                        <p class="font-semibold text-[#03045E]">Rp200.000</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-xl shadow flex justify-between">
+                        <p>Budi deposited (Group Gift)</p>
+                        <p class="font-semibold text-[#03045E]">Rp150.000</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+   <script>
+
+// ========================= GENERATE ROOM ID =========================
+function generateRoomId() {
+    return "RM" + Math.floor(100000 + Math.random() * 900000);
+}
+
+
+// ========================= JOIN ROOM =========================
+function openJoinRoom() {
+    document.getElementById("joinRoomModal").classList.remove("hidden");
+}
+
+function closeJoinRoom() {
+    document.getElementById("joinRoomModal").classList.add("hidden");
+}
+
+function submitJoinRoom() {
+    const code = document.getElementById("joinCode").value.trim().toUpperCase();
+    if (!code) {
+        alert("Please enter a room code.");
+        return;
+    }
+
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+    const room = rooms.find(r => r.code === code);
+
+    if (!room) {
+        alert("Room not found!");
+        return;
+    }
+
+    // Tambah member
+    room.members.push({
+        name: "Guest " + room.members.length,
+        role: "Member"
+    });
+
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+
+    alert(`Successfully joined ${room.name}`);
+    closeJoinRoom();
+    renderRooms();
+}
+
+
+// ========================= CREATE ROOM MODAL =========================
+function openCreateRoom() {
+    document.getElementById("createRoomModal").classList.remove("hidden");
+
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("createdDate").value = today;
+}
+
+function closeCreateRoom() {
+    document.getElementById("createRoomModal").classList.add("hidden");
+}
+
+
+// ========================= GENERATE ROOM CODE =========================
+function generateRoomCode() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code = "";
+    for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
+
+
+// ========================= SUBMIT CREATE ROOM =========================
+function submitCreateRoom() {
+    const name = document.getElementById("roomName").value.trim();
+    const target = Number(document.getElementById("targetAmount").value);
+    const date = document.getElementById("targetDate").value;
+
+    if (!name || !target || !date) {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    const roomCode = generateRoomCode();
+
+    const newRoom = {
+        id: generateRoomId(),
+        code: roomCode,              // ✅ SIMPAN ROOM CODE
+        name,
+        target,
+        date,
+        progress: 0,
+        members: [
+            { name: "You", role: "Owner" }   // ✅ MEMBER REAL
+        ],
+        currentAmount: 0
+    };
+
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+    rooms.push(newRoom);
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+
+    closeCreateRoom();
+    showSuccessPopup(roomCode);
+    renderRooms();
+}
+
+// ========================= POPUP CODE =========================
+function showSuccessPopup(code) {
+    document.getElementById("generatedCode").value = code;
+    document.getElementById("successPopup").classList.remove("hidden");
+}
+
+
+function copyRoomCode() {
+    navigator.clipboard.writeText(document.getElementById("generatedCode").value);
+    alert("Room code copied!");
+}
+
+function normalizeRoom(room) {
+    return {
+        name: room.name ?? "Unnamed Room",
+        members: Number(room.members ?? 1),
+        target: Number(room.target ?? 0),
+        progress: Number(room.progress ?? 0),
+        date: room.date ?? "-"
+    };
+}
+
+
+// ========================= ADD ROOM TO HOME =========================
+function addRoomToHome(room) {
+    room = normalizeRoom(room);
+
+    const container = document.querySelector('.space-y-4');
+
+    const card = document.createElement("div");
+    card.className = "bg-white rounded-2xl p-4 shadow-md border border-[#BFDFFB]";
+
+    card.innerHTML = `
+        <div class="flex justify-between items-center mb-1">
+            <p class="text-base font-semibold text-[#03045E]">${room.name}</p>
+            <p class="text-sm font-semibold text-[#0053A0]">${room.progress}%</p>
+        </div>
+
+        <p class="text-xs text-gray-500 mb-2">${room.members} members</p>
+
+        <div class="w-full h-3 bg-[#E5F2FF] rounded-full overflow-hidden">
+            <div class="h-full bg-[#0077B6] rounded-full" style="width: ${room.progress}%"></div>
+        </div>
+
+        <div class="flex justify-between text-sm mt-3 text-[#012A4A]">
+            <p class="font-semibold">Rp ${room.target.toLocaleString()}</p>
+            <p class="text-gray-500">${room.date}</p>
+        </div>
+    `;
+
+    container.appendChild(card);
+}
+
+function loadRooms() {
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+    const container = document.querySelector('.space-y-4');
+
+    rooms.forEach(r => {
+        const room = normalizeRoom(r);
+
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl p-4 shadow-md border border-[#BFDFFB]";
+
+        card.innerHTML = `
+            <div class="flex justify-between items-center mb-1">
+                <p class="text-base font-semibold text-[#03045E]">${room.name}</p>
+                <p class="text-sm font-semibold text-[#0053A0]">${room.progress}%</p>
+            </div>
+
+            <p class="text-xs text-gray-500 mb-2">${room.members} members</p>
+
+            <div class="w-full h-3 bg-[#E5F2FF] rounded-full overflow-hidden">
+                <div class="h-full bg-[#0077B6] rounded-full" style="width: ${room.progress}%"></div>
+            </div>
+
+            <div class="flex justify-between text-sm mt-3 text-[#012A4A]">
+                <p class="font-semibold">Rp ${room.target.toLocaleString()}</p>
+                <p class="text-gray-500">${room.date}</p>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+window.onload = function() {
+    renderRooms();
+
+};
+
+function renderRooms() {
+    const container = document.querySelector('.space-y-4');
+    container.innerHTML = "";
+    let rooms = JSON.parse(localStorage.getItem("rooms")) || [];
+
+    rooms.forEach(room => {
+        const target = Number(room.target || 0);
+        const current = Number(room.currentAmount || 0);
+
+        const percent = target > 0
+            ? Math.min(Math.round((current / target) * 100), 100)
+            : 0;
+
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl p-4 shadow-md border border-[#BFDFFB]";
+
+        card.innerHTML = `
+            <div class="flex justify-between items-center mb-1">
+                <p class="text-base font-semibold text-[#03045E]">${room.name}</p>
+                <p class="text-sm font-semibold text-[#0053A0]">${percent}%</p>
+            </div>
+
+            <p class="text-xs text-gray-500 mb-2">
+                ${(room.members?.length || room.members || 1)} members
+            </p>
+
+            <div class="w-full h-3 bg-[#E5F2FF] rounded-full overflow-hidden">
+                <div class="h-full bg-[#0077B6] rounded-full transition-all duration-500"
+                     style="width: ${percent}%">
+                </div>
+            </div>
+
+            <div class="flex justify-between text-sm mt-3 text-[#012A4A]">
+                <p class="font-semibold">
+                    Rp ${current.toLocaleString("id-ID")}
+                </p>
+                <p class="text-gray-500">${room.date || "-"}</p>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+window.addEventListener("storage", function(event) {
+    if (event.key === "rooms") {
+        renderRooms();
+    }
+});
+
+</script>
+
+
+</body>
+</html>
