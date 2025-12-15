@@ -81,25 +81,28 @@ Route::middleware('auth')->prefix('personal')->name('personal.')->group(function
 |--------------------------------------------------------------------------*/
 Route::middleware('auth')->prefix('group')->name('group.')->group(function () {
 
-    // Home
+    // home
     Route::get('/home', [GroupHomeController::class, 'index'])->name('home');
 
-    // Rooms
+    // create room
+    Route::get('/create', [GroupRoomController::class, 'create'])->name('create');
+    Route::post('/create', [GroupRoomController::class, 'store'])->name('store');
+
+    // join room
+   Route::post('/join', [GroupRoomController::class, 'join'])
+    ->name('rooms.join');
+    
+    // rooms
     Route::get('/rooms', [GroupRoomController::class, 'index'])->name('rooms');
     Route::get('/rooms/{room}', [GroupRoomController::class, 'show'])->name('rooms.show');
-    Route::get('/rooms/{room}/edit', [GroupRoomController::class, 'edit'])->name('rooms.edit');
-    Route::put('/rooms/{room}', [GroupRoomController::class, 'update'])->name('rooms.update');
     Route::delete('/rooms/{room}', [GroupRoomController::class, 'destroy'])->name('rooms.destroy');
-    Route::post('/rooms/{room}/spend', [GroupRoomController::class, 'storeSpend'])->name('rooms.spend');
+// EDIT ROOM
+Route::get('/rooms/{room}/edit', [GroupRoomController::class, 'edit'])
+    ->name('rooms.edit');
 
-
-    // Create room
-    Route::get('/create', [GroupRoomController::class, 'create'])->name('create');
-    Route::post('/create', [GroupRoomController::class, 'store'])->name('create.store');
-
-    // Join room
-    Route::get('/join', [GroupRoomController::class, 'join'])->name('join');
-    Route::post('/join', [GroupRoomController::class, 'join'])->name('join.store');
+Route::put('/rooms/{room}', [GroupRoomController::class, 'update'])
+    ->name('rooms.update');
+;
 
     // Created page
     Route::get('/created/{room}', [GroupRoomController::class, 'created'])->name('created');

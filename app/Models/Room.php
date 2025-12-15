@@ -22,11 +22,12 @@ class Room extends Model
         return $this->belongsTo(User::class); // tabungan
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'room_user') // sesuaikan nama pivot tabel kamu
-        ->withTimestamps();
+public function users()
+{
+    return $this->belongsToMany(User::class, 'room_user');
 }
+
+
 
     // semua tabungan di room (termasuk milik tabungan)
     public function tabungan()

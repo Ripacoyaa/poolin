@@ -41,17 +41,19 @@
     <div class="title">Join Room</div>
     <div class="subtitle">Enter the unique code to join the room that has been created.</div>
 
-    <form method="POST" action="{{ route('group.join.post') }}">
-        @csrf
-        <input type="text" name="room_code" placeholder="Enter room code"
-               value="{{ old('room_code') }}">
+<form method="POST" action="{{ route('group.rooms.join') }}">
+    @csrf
 
-        @error('room_code')
-        <div class="error">{{ $message }}</div>
-        @enderror
+    <input
+        type="text"
+        name="kode_room"
+        placeholder="Enter Room Code"
+        required
+    >
 
-        <button type="submit" class="btn">Join Room</button>
-    </form>
+    <button type="submit">Join</button>
+</form>
+
 
     <div class="back">
         or <a href="{{ route('group.choose') }}">back to choose</a>

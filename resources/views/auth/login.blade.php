@@ -42,7 +42,7 @@
     </div>
 
     <div class="flex justify-center">
-      <img src="{{ asset('images/loginPage.png') }}" alt="Login Illustration" class="w-60">
+      <img src="{{ asset('images/LoginPage.png') }}" alt="Login Illustration" class="w-60">
     </div>
 
     <p class="text-sm opacity-80">
@@ -113,7 +113,7 @@
             Remember me
           </label>
 
-          @if (Route::has('password.request'))
+          @if (Route::has('password.request')) 
             <a href="{{ route('password.request') }}" class="hover:underline">
               Forgot password?
             </a>

@@ -126,7 +126,7 @@
 
           <!-- FULL NAME -->
           <div>
-            <label class="font-semibold text-gray-700">Full Name</label>
+            <label class="font-semibold text-gray-700">Username</label>
             <input
               id="nameInput"
               type="text"

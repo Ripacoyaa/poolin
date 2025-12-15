@@ -60,14 +60,6 @@
             <div class="text-3xl font-bold text-[#050691]">
                 {{ isset($goal) ? 'Edit Goal' : 'Create a New Goal' }}
             </div>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit"
-                        class="px-4 py-1.5 rounded-full border border-[#03045E] text-[#03045E] text-sm font-semibold bg-white hover:bg-blue-50">
-                    Logout
-                </button>
-            </form>
         </div>
 
         <!-- FORM CARD -->

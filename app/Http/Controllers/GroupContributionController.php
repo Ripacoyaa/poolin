@@ -150,7 +150,7 @@ class GroupContributionController extends Controller
     $request->validate([
         'nama_room' => 'required|string|max:255',
         'target_tabungan' => 'nullable|string',
-        'target_date' => 'nullable|date',
+        'target_tanggal' => 'nullable|date',
     ]);
 
     // update nama room

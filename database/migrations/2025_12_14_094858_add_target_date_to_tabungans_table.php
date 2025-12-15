@@ -9,14 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tabungan', function (Blueprint $table) {
-            $table->date('target_date')->nullable()->after('target_tabungan');
+            $table->date('target_tanggal')->nullable()->after('target_tabungan');
         });
     }
 
     public function down(): void
     {
         Schema::table('tabungan', function (Blueprint $table) {
-            $table->dropColumn('target_date');
+            $table->dropColumn('target_tanggal');
         });
     }
 };

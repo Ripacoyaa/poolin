@@ -149,35 +149,44 @@
             </div>
         </div>
 
-        <!-- JOIN ROOM MODAL -->
-        <div id="joinRoomModal" class="fixed inset-0 bg-black/40 hidden z-50 flex justify-center items-center">
-            <div class="bg-white w-96 p-6 rounded-2xl items-center shadow-xl">
-                <h2 class="text-xl font-bold mb-3 text-blue-900">Join a Room</h2>
+        <<!-- JOIN ROOM MODAL (FIXED) -->
+<div id="joinRoomModal" class="fixed inset-0 bg-black/40 hidden z-50 flex justify-center items-center">
+    <div class="bg-white w-96 p-6 rounded-2xl shadow-xl">
+        <h2 class="text-xl font-bold mb-3 text-blue-900">Join a Room</h2>
 
-                <label class="text-sm text-gray-600">Enter Room Code</label>
-                <input id="joinCode" type="text"
-                       class="w-full mt-1 p-2 border rounded-lg bg-gray-100 focus:bg-white outline-none">
+        <form method="POST" action="{{ route('group.rooms.join') }}">
+            @csrf
 
-                <div class="flex justify-end gap-3 mt-6">
-                    <button onclick="closeJoinRoom()"
-                            class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
-                        Cancel
-                    </button>
+            <label class="text-sm text-gray-600">Enter Room Code</label>
+            <input
+                name="kode_room"
+                type="text"
+                required
+                class="w-full mt-1 p-2 border rounded-lg bg-gray-100 focus:bg-white outline-none uppercase">
 
-                    <button onclick="submitJoinRoom()"
-                            class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-                        Join
-                    </button>
-                </div>
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button"
+                        onclick="closeJoinRoom()"
+                        class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                    Join
+                </button>
             </div>
-        </div>
+        </form>
+    </div>
+</div>
+
 
         <!-- CREATE ROOM MODAL -->
         <div id="createRoomModal" class="fixed inset-0 bg-black/40 hidden z-50 flex justify-center items-center">
             <div class="bg-white w-[420px] p-6 rounded-2xl shadow-xl">
                 <h2 class="text-xl font-bold mb-4 text-blue-900">Create a New Room</h2>
 
-                <form method="POST" action="{{ route('group.create.store') }}">
+                <form method="POST" action="{{ route('group.store') }}">
                     @csrf
 
                     <label class="text-sm text-gray-600">Group Name</label>
@@ -379,15 +388,13 @@
         function closeJoinRoom() {
             document.getElementById("joinRoomModal").classList.add("hidden");
         }
-        function submitJoinRoom() {
-            const code = document.getElementById("joinCode").value.trim().toUpperCase();
-            if (!code) {
-                alert("Please enter a room code.");
-                return;
-            }
-            alert("Joining room with code: " + code);
-            closeJoinRoom();
-        }
+        function openJoinRoom() {
+        document.getElementById("joinRoomModal").classList.remove("hidden");
+    }
+
+    function closeJoinRoom() {
+        document.getElementById("joinRoomModal").classList.add("hidden");
+    }
 
         // ------------------------- CREATE ROOM -------------------------
         function openCreateRoom() {

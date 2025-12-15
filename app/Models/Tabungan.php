@@ -8,11 +8,13 @@ class Tabungan extends Model
 {
     protected $fillable = [
         'user_id',
+        'nama',
+        'foto',
         'room_id',
         'target_tabungan',
         'total_terkumpul',
+        'target_tanggal',
         'status',
-        'target_date', // ✅ tambahin ini kalau kolomnya ada
     ];
 
     public function room()

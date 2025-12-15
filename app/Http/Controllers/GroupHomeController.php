@@ -9,15 +9,18 @@ use Illuminate\Support\Facades\DB;
 class GroupHomeController extends Controller
 {
     public function index()
+    
     {
+
         $user = Auth::user();
 
         // rooms yang user join
-        $rooms = $user->rooms()
-            ->with(['tabungan'])
-            ->withCount('users')
-            ->orderBy('nama_room')
-            ->get();
+       $rooms = Auth::user()->rooms()
+    ->with(['tabungan'])
+    ->withCount('users')
+    ->orderBy('nama_room')
+    ->get();
+
 
         $roomIds = $rooms->pluck('id');
 

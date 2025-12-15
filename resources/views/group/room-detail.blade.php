@@ -182,7 +182,7 @@
                         {{ $member->name ?? 'User' }}
                     </p>
                     <p class="text-gray-500 text-sm">
-                        {{ (int)$member->id === (int)$room->user_id ? 'tabungan' : 'Member' }}
+                        {{ (int)$member->id === (int)$room->user_id ? 'Admin' : 'Member' }}
                     </p>
                 </div>
 
@@ -224,7 +224,7 @@
 <script>
 // sementara masih dummy data JS, sama seperti HTML asli kamu
 const members = [
-    { name: "Andi", role: "tabungan" },
+    { name: "Andi", role: "Member" },
     { name: "Rian", role: "Member" },
     { name: "Bagas", role: "Member" },
     { name: "Sinta", role: "Member" },
